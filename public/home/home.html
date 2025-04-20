@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Garage Sale</title>
-    <link rel="stylesheet" href="/public/styles/styles.css" />
-    <link rel="stylesheet" href="/public/styles/composition.css" />
-    <link rel="stylesheet" href="/public/styles/block.css" />
-    <link rel="stylesheet" href="/public/styles/exception.css" />
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="stylesheet" href="../styles/composition.css" />
+    <link rel="stylesheet" href="../styles/block.css" />
+    <link rel="stylesheet" href="../styles/utility.css" />
+    <link rel="stylesheet" href="../styles/exception.css" />
 </head>
 <body>
     <div class="sidebar">
@@ -17,27 +18,31 @@
     <div class="content">
         <div class="header">
             <h1>All Items</h1>
-            </div>
-
-        <div class="listing">
-            <h3>Item Name 1</h3>
-            <p>Description of item 1.</p>
-            <p>Price: $XX.XX</p>
-            <button>Add to Cart</button>
-            <button>Add to Wishlist</button>
         </div>
+        <ul class="itemsList" id="itemsList">
+            <li class="listing">
+                <h3>Item Name 1</h3>
+                <img src="#" alt="image of item 1" />
+                <p>Description of item 1.</p>
+                <p>Price: $XX.XX</p>
+                <button>Add to Cart</button>
+                <button>Add to Wishlist</button>
+            </li>
+            <li class="listing">
+                <h3>Another Item</h3> 
+                <img src="#" alt="image of item 2" />               
+                <p>More details about this item.</p>
+                <p>Price: $YY.YY</p>
+                <button>Add to Cart</button>
+                <button>Add to Wishlist</button>
+            </li>
+        </ul>
+        
 
-        <div class="listing">
-            <h3>Another Item</h3>
-            <p>More details about this item.</p>
-            <p>Price: $YY.YY</p>
-            <button>Add to Cart</button>
-            <button>Add to Wishlist</button>
-        </div>
-        </div>
+    <script type="module">
+        import {index} from "./views.js";
 
-    <script>
-
+        index(document.getElementById("itemsList"));
     </script>
 </body>
 </html>
