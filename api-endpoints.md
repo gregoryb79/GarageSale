@@ -19,6 +19,7 @@
 
 ## Items
 - `GET /items` – Get all store items
+- `GET /items?search=query` - Get store items that answer to query in name|description|category
 - `POST /items` – Add new item (admin only)
 - `GET /items/:id` – Get item by ID
 - `PUT /items/:id` – Edit item info (admin only)
