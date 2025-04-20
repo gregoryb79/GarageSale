@@ -86,10 +86,10 @@ export async function getWishlist(): Promise<ReturnWishlist|[]> {
     } 
 }
 
-export async function getItems(): Promise<Item[]> {
-    console.log("getItems starts");    
+export async function getItems(query: string): Promise<Item[]> {
+    console.log(`getItems with query = ${query} starts`);
     try {
-        const res = await fetch("/items");
+        const res = await fetch(`/items${query}`);
         if (!res.ok) {
             const message = await res.text();             
             throw new Error(`Failed to get items. Status: ${res.status}. Message: ${message}`);
