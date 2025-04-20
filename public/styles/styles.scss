@@ -32,3 +32,24 @@ main {
     flex-direction: column;
     gap: 1rem;
 }
+
+
+$primary-color: #4CAF50;        
+$primary-color-dark: #388E3C;
+$secondary-color: #008CBA;       
+$secondary-color-dark: #1278ab;
+$text-color: #333;
+$light-text-color: #666;
+$background-color: #52b9ab;
+$border-color: #ddd;
+$font-family: sans-serif;
+
+
+$base-padding: 10px;
+$base-margin: 10px;
+
+
+$small: 576px; 
+$medium: 768px; 
+$large: 992px;  
+$extra-large: 1200px;
