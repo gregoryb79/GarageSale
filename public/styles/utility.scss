@@ -1,0 +1,70 @@
+@import "styles.scss";
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.m-0 { margin: 0; }
+.m-auto { margin: auto; }
+.mt-0 { margin-top: 0; }
+.mt-sm { margin-top: ($base-margin / 2); }
+.mt-md { margin-top: $base-margin; }
+.mt-lg { margin-top: ($base-margin * 2); }
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: ($base-margin / 2); }
+.mb-md { margin-bottom: $base-margin; }
+.mb-lg { margin-bottom: ($base-margin * 2); }
+.ml-0 { margin-left: 0; }
+.ml-sm { margin-left: ($base-margin / 2); }
+.ml-md { margin-left: $base-margin; }
+.ml-lg { margin-left: ($base-margin * 2); }
+.mr-0 { margin-right: 0; }
+.mr-sm { margin-right: ($base-margin / 2); }
+.mr-md { margin-right: $base-margin; }
+.mr-lg { margin-right: ($base-margin * 2); }
+.p-0 { padding: 0; }
+.p-sm { padding: ($base-padding / 2); }
+.p-md { padding: $base-padding; }
+.p-lg { padding: ($base-padding * 2); }
+.pt-0 { padding-top: 0; }
+.pt-sm { padding-top: ($base-padding / 2); }
+.pt-md { padding-top: $base-padding; }
+.pt-lg { padding-top: ($base-padding * 2); }
+.pb-0 { padding-bottom: 0; }
+.pb-sm { padding-bottom: ($base-padding / 2); }
+.pb-md { padding-bottom: $base-padding; }
+.pb-lg { padding-bottom: ($base-padding * 2); }
+.pl-0 { padding-left: 0; }
+.pl-sm { padding-left: ($base-padding / 2); }
+.pl-md { padding-left: $base-padding; }
+.pl-lg { padding-left: ($base-padding * 2); }
+.pr-0 { padding-right: 0; }
+.pr-sm { padding-right: ($base-padding / 2); }
+.pr-md { padding-right: $base-padding; }
+.pr-lg { padding-right: ($base-padding * 2); }
+
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-grow-1 { flex-grow: 1; }
+.justify-content-center { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+.align-items-start{ align-items: flex-start; }
+
+// Responsive utilities
+@media (max-width: $small) {
+  .sm-text-center { text-align: center; }
+  .sm-flex-column { flex-direction: column; }
+}
+
+@media (max-width: $medium) {
+  .md-text-center { text-align: center; }
+  .md-flex-column { flex-direction: column; }
+}
+
+@media (max-width: $large) {
+  .lg-text-center { text-align: center; }
+  .lg-flex-column { flex-direction: column; }
+}
+
