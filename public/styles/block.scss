@@ -1,0 +1,140 @@
+@import "styles.scss";
+
+@mixin responsive($breakpoint) {
+    @if $breakpoint == small {
+      @media (max-width: $small) { @content; }
+    } @else if $breakpoint == medium {
+      @media (max-width: $medium) { @content; }
+    } @else if $breakpoint == large {
+      @media (max-width: $large) { @content; }
+    } @else if $breakpoint == extra-large {
+      @media (min-width: $extra-large) { @content; }
+    } @else {
+      @media (max-width: $breakpoint) { @content; } 
+    }
+  }
+  
+  @mixin button-variant($bg-color, $text-color, $hover-bg-color) {
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    padding: $base-padding $base-padding * 1.5;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: $hover-bg-color;
+    }
+  }
+
+
+  .button {
+    @include button-variant($primary-color, white, $primary-color-dark);
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .secondary-button {
+    @include button-variant($secondary-color, white, $secondary-color-dark);
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .back-button {
+    padding: $base-padding $base-padding * 1.5;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  form {
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: $base-padding;
+      margin-bottom: $base-margin;
+      border: 1px solid $border-color;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+  
+    textarea {
+      resize: none;
+    }
+  }
+  
+  .listing {
+    border: 1px solid $border-color;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      margin-bottom: 10px;
+    }
+  
+    button {
+      margin-right: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $base-margin * 2;
+  
+    h1 {
+      margin: 0;
+    }
+  }
+  
+  .sidebar {
+    width: 200px;
+    padding: $base-padding * 2;
+    background-color: #f4f4f4;
+    border-right: 1px solid $border-color;
+  
+    button {
+      display: block;
+      width: 100%;
+      padding: $base-padding;
+      margin-bottom: $base-margin;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 5px;
+    }
+  }
+  
+  @media (max-width: $medium) {
+    .sidebar {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      padding: $base-padding;
+  
+      button {
+        flex: 0 0 auto;
+        margin-right: 10px;
+        width: auto;
+      }
+    }
+  }
+  
+  
