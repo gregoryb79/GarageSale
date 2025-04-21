@@ -1,8 +1,8 @@
-import {onRegisterFormSubmit} from "./controller.js";
+import {onLoginFormSubmit} from "./controller.js";
 
-export function register(registerForm : HTMLFormElement){
+export function logIn(loginForm : HTMLFormElement){
 
-    registerForm.addEventListener("submit", async function(e){
+    loginForm.addEventListener("submit", async function(e){
         e.preventDefault();         
 
         const formElement = e.target as HTMLFormElement;
@@ -12,10 +12,10 @@ export function register(registerForm : HTMLFormElement){
             .querySelectorAll("input, button")
             .forEach((element) => (element as HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement).disabled = true);
         try{
-            const result = await onRegisterFormSubmit(formData);
+            const result = await onLoginFormSubmit(formData);
                         
             if (result){
-                window.location.replace("../home/home.html");
+                window.location.replace("./home/home.html");
                 return;
             }                     
         }catch(error){
@@ -26,6 +26,6 @@ export function register(registerForm : HTMLFormElement){
             .querySelectorAll("input, button")
             .forEach((element) => (element as HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement).disabled = false);
 
-        registerForm.reset();  
+        loginForm.reset();  
     });
 }

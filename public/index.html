@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garage Sale</title>
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="stylesheet" href="styles/composition.css" />
-    <link rel="stylesheet" href="styles/utility.css" />
-    <link rel="stylesheet" href="styles/block.css" />
-    <link rel="stylesheet" href="styles/exception.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/composition.css" />
+    <link rel="stylesheet" href="./styles/utility.css" />
+    <link rel="stylesheet" href="./styles/block.css" />
+    <link rel="stylesheet" href="./styles/exception.css" />
 
 </head>
 
@@ -20,19 +20,20 @@
     
             <h2>Login</h2>
             <form id="loginForm">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
+                <input name="email" type="email" placeholder="Email" required>
+                <input name="password" type="password" placeholder="Password" required>
                 <button type="submit">Login</button>
             </form>
             <div class="register-link">
-                <a href="register/register.html">Register</a>
+                <a href="./register/register.html">Register</a>
             </div>
         </div>
 
     <script type="module">
-        import { initApp } from "./index.js";
+        import { logIn } from "./views.js";
 
-        initApp(document.getElementById("app"));
+        logIn(document.getElementById("loginForm"));
+
     </script>
 </body>
 

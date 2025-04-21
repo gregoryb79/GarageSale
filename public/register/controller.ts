@@ -1,14 +1,10 @@
-import { doRegister as defaultDoRegister } from "./model.js";
+import { doRegister } from "./model.js";
 
-export async function onRegisterFormSubmit(
-  formData: FormData,
-  doRegister: (user: { email: string; password: string; username: string }) => Promise<void> = defaultDoRegister // Default to the real function
-): Promise<boolean> {
+export async function onRegisterFormSubmit(formData: FormData): Promise<boolean> {
 
     const rawData = Object.fromEntries(formData);  
     console.log(`register form submitted, email: ${rawData.email},\n
-                 password: ${rawData.password},\n
-                 username: ${rawData.username}`);
+                 password: ${rawData.password}`);
 
     if(!rawData.email){
         throw new Error("email can't be empty"); 
@@ -21,27 +17,18 @@ export async function onRegisterFormSubmit(
     }
     if (typeof rawData.password !== "string"){
         throw new Error("Password must be a string");
-    }
+    }    
+          
+    const email = rawData.email;
+    const password = rawData.password; 
 
-    if(!rawData.username){
-        throw new Error("username can't be empty"); 
-    }
-    if (typeof rawData.username !== "string"){
-        throw new Error("username must be a string");
-    }
-     
-    const user = {
-        email: rawData.email,
-        password: rawData.password,
-        username: rawData.username
-    };
-        
     try{
-        await doRegister(user);
+        await doRegister(email,password);
         return true;         
     } catch (error){
-        console.error(`failed to register with: ${user.email}, error: ${error}`);
-        throw error;
+        console.error(`failed to register with: ${email}, error: ${error}`);
+        return true; // temp for testing, remove this line when done!!!
+        // throw error;
     }        
      
    

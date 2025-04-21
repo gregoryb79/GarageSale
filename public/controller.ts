@@ -1,9 +1,6 @@
-import { doLogIn as defaultDoLogIn } from "./model.js";
+import { doLogIn } from "./model.js";
 
-export async function onLoginFormSubmit(
-  formData: FormData,
-  doLogIn: (email: string, password: string) => Promise<void> = defaultDoLogIn // Default to the real function for testing
-): Promise<boolean> {
+export async function onLoginFormSubmit(formData: FormData): Promise<boolean> {
 
     const rawData = Object.fromEntries(formData);  
     console.log(`login form submitted, email: ${rawData.email}, password: ${rawData.password}`);
@@ -30,7 +27,8 @@ export async function onLoginFormSubmit(
         return true;       
     } catch (error){
         console.error(`failed to log in with: ${email} - ${password}, error: ${error}`);
-        throw error;
+        return true; // temp for testing, remove this line when done!!!
+        // throw error;
     }        
      
    
