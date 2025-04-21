@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Garage Sale</title>
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="stylesheet" href="../styles/composition.css" />
+    <link rel="stylesheet" href="../styles/utility.css" />
+    <link rel="stylesheet" href="../styles/block.css" />
+    <link rel="stylesheet" href="../styles/exception.css" />
+</head>
+<body>
+    <div class="sidebar">
+        <button onclick="location.href='/public/account/account.html'">Wishlist</button>
+        <button onclick="location.href='/public/cart/cart.html'">Cart</button>
+        <button onclick="location.href='/public/upload/upload.html'">Upload New Item</button>
+        <button onclick="location.href='/public/my_listings/.html'">My Listings</button>
+    </div>
+    <div class="content">
+        <div class="header">
+            <button class="back-button" onclick="location.href='account.html'">Back to Wishlist</button>
+            <h1>My Cart</h1>
+        </div>
+        <ul>
+
+        <li class="cart-item">
+            Item in Cart 1 - Price: $XX.XX <button>Remove</button>
+        </li>
+        <li class="cart-item">
+            Another item in your cart - Price: $YY.YY <button>Remove</button>
+        </li>
+    </ul>
+        <div class="payment-section">
+            <h2>Payment Information</h2>
+            <input type="text" placeholder="Card Number">
+            <input type="text" placeholder="Expiry Date (MM/YY)">
+            <input type="text" placeholder="CVV">
+            <button onclick="alert('Payment Processing (Not Implemented)')">Pay Now</button>
+            <div id="paymentNotification" class="notification"></div>
+        </div>
+    
+    </div>
+
+    <script>
+   </script>
+</body>
+</html>
