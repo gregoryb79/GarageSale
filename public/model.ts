@@ -1,4 +1,4 @@
-import {items as tempItems} from "./devtemps.js"
+import {items as tempItems, cart as tempCart, wishlist as tempWishlist} from "./devtemps.js"
 
 export type Item = {
     _id: string;
@@ -12,25 +12,27 @@ export type Item = {
     updatedAt?: string;
   };
 
-type Cart = {
+export type Cart = {
     _id: string;
     userId: string; 
-    items: [{itemId : string,
-        quantity: number}];
+    items: {itemId : string,
+        quantity: number}[];
     createdAt?: string; 
     updatedAt?: string; 
 }
 
-type Wishlist = {
+export type Wishlist = {
     _id: string;
     userId: string; 
-    items: [{itemId : string,
-            quantity: number}];
+    items: {itemId : string,
+            quantity: number}[];
     createdAt?: string; 
     updatedAt?: string; 
 }
+export type ReturnWishlist = { itemId: string, quantity: number, itemName: string }[];
+export type ReturnCart =  {itemId : string, quantity: number, itemName: string}[];
 
-type User = {
+export type User = {
     _id: string;
     email: string;
     password: string;
@@ -98,11 +100,11 @@ export async function doLogIn(email : string, password: string): Promise<void> {
 }
 
 
-export type ReturnCart =  [{itemId : string, quantity: number}];
+
 export async function getCart(): Promise<ReturnCart|[]> {
     console.log("getCart starts");    
     try {
-        const res = await fetch(`/users/${currentUser._id}/cart`);
+        const res = await fetch(`/cart`);
         if (!res.ok) {
             const message = await res.text();             
             throw new Error(`Failed to get cart. Status: ${res.status}. Message: ${message}`);
@@ -111,15 +113,14 @@ export async function getCart(): Promise<ReturnCart|[]> {
         return cart.items; 
     }catch (error) {
         console.error("Error getting cart:", error);
-        return [];     
+        return tempCart;     
     } 
 }
 
-export type ReturnWishlist = [{itemId : string, quantity: number}];
 export async function getWishlist(): Promise<ReturnWishlist|[]> {
     console.log("getWishlist starts");    
     try {
-        const res = await fetch(`/users/${currentUser._id}/wishlist`);
+        const res = await fetch(`/wishlist`);
         if (!res.ok) {
             const message = await res.text();             
             throw new Error(`Failed to get wishlist. Status: ${res.status}. Message: ${message}`);
@@ -128,7 +129,7 @@ export async function getWishlist(): Promise<ReturnWishlist|[]> {
         return wishlist.items; 
     }catch (error) {
         console.error("Error getting wishlist:", error);
-        return [];        
+        return tempWishlist;        
     } 
 }
 
@@ -145,6 +146,52 @@ export async function getItems(query: string): Promise<Item[]> {
     }catch (error) {
         console.error("Error getting items:", error);
         return tempItems;        
+    } 
+}
+
+export async function addToCart(itemId: string): Promise<void> {
+    console.log(`addToCart with itemId = "${itemId}" starts`);
+    const body = JSON.stringify({itemId: itemId});
+    console.log(`body: ${body}`);
+
+    try {
+        const res = await fetch(`/cart`, {
+            method: "post",
+            body: body,
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        if (!res.ok) {
+            const message = await res.text();             
+            throw new Error(`Failed to add item to cart. Status: ${res.status}. Message: ${message}`);
+        }        
+    }catch (error) {
+        console.error("Error adding item to cart:", error);        
+        throw error;        
+    } 
+}
+
+export async function addToWishList(itemId: string): Promise<void> {
+    console.log(`addToWishList with itemId = "${itemId}" starts`);
+    const body = JSON.stringify({itemId: itemId});
+    console.log(`body: ${body}`);
+
+    try {
+        const res = await fetch(`/wishlist`, {
+            method: "post",
+            body: body,
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        if (!res.ok) {
+            const message = await res.text();             
+            throw new Error(`Failed to add item to cart. Status: ${res.status}. Message: ${message}`);
+        }        
+    }catch (error) {
+        console.error("Error adding item to cart:", error);        
+        throw error;        
     } 
 }
 

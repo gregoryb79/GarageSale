@@ -21,18 +21,27 @@
         <div class="header">
             <button class="back-button" onclick="location.href='../home/home.html'">Back to Home</button>
             <h1>My Wishlist</h1>
-        </ul>
-
-        <div class="wishlist-item">
-            Item from Wishlist 1
         </div>
-        <div class="wishlist-item">
-            Another item in your wishlist
-        </div>
-    </ul>
+        <ul class="wishlist" id="wishlist"> 
+            <li class="wishlist-item">
+                <p>Item from Wishlist 1</p>
+                <div class="quantityCluster">
+                    <button>-</button>
+                    <p> 1 </p>
+                    <button>+</button>
+                </div>                
+                <button>Move to Cart</button>
+                <button>Delete</button>
+            </li>
+            <li class="wishlist-item">
+                Another item in your wishlist
+            </li>
+         </ul>
 
-    <script>
+        <script type="module">
+            import {index} from "./views.account.js";
 
-    </script>
+            index(document.getElementById("wishlist"));
+        </script>
 </body>
 </html>
