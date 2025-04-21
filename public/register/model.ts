@@ -1,18 +1,18 @@
-type User = {
-    _id: string,
-    email: string,
-    password: string,
-    username: string,
-    createdAt: string
-}
 
-type submittedUser = Omit<User,"createdAt"|"_id">;
-export async function doRegister(user: submittedUser): Promise<void> {   
+export async function doRegister(email : string, password: string): Promise<void> {   
       
-    const body = JSON.stringify(user);
+    console.log(`doRegister starts with: ${email} - ${password}`);
+    
+    const userInfo = {
+        email: email,
+        password: password,
+    };    
+  
+    const body = JSON.stringify(userInfo);
+    console.log(`body: ${body}`);
 
     try{
-        const res = await fetch(`/register`, {
+        const res = await fetch(`/auth/register`, {
             method: "post",
             body,
             headers: {
@@ -24,7 +24,7 @@ export async function doRegister(user: submittedUser): Promise<void> {
             console.log(`Failed to register. Status: ${res.status}. Message: ${message}`);
             throw new Error(message);
         }
-        console.log(`Registered with: ${user.email} - ${user.password}`);        
+        console.log(`Registered with: ${userInfo.email} - ${userInfo.password}`);        
     }catch(error){
         console.error(`Error registering, throwing error: ${error}`);  
         throw error;      

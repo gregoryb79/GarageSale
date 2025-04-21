@@ -15,7 +15,7 @@ export function register(registerForm : HTMLFormElement){
             const result = await onRegisterFormSubmit(formData);
                         
             if (result){
-                window.location.replace("/home");
+                window.location.replace("../home/home.html");
                 return;
             }                     
         }catch(error){
