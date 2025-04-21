@@ -1,30 +1,123 @@
-@import "styles.scss";
+@import 'utility.scss'; 
 
-body {
-  font-family: $font-family;
-  display: flex;
+.page-header {
+  padding: $base-padding;
   background-color: $background-color;
-  min-height: 100vh;
-  margin: 0;
+  margin-bottom: $large-spacing;
+  border-bottom: 1px solid $border-color;
+
+  h1 {
+    font-size: $large-font-size;
+    color: $text-color;
+    margin-bottom: $small-spacing;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-right: $medium-spacing;
+
+        a {
+          color: $link-color;
+          text-decoration: none;
+
+          &:hover {
+            color: $link-hover-color;
+          }
+        }
+      }
+    }
+  }
 }
 
-.container {
-  width: 100%;
-  max-width: $extra-large;
-  margin: 0 auto;
-  padding: $base-padding * 2;
+.main-content {
+  padding: $base-padding;
+  margin-bottom: $large-spacing;
+
+  &__inner { 
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: $large-font-size;
+    color: $text-color;
+    margin-bottom: $medium-spacing;
+    text-align: center;
+  }
+
+  p {
+    font-size: $base-font-size;
+    color: $text-color;
+    line-height: 1.7;
+    margin-bottom: $small-spacing;
+  }
 }
 
-.content {
-  flex-grow: 1;
-  padding: $base-padding * 2;
+.site-footer {
+  padding: $base-padding;
+  background-color: #222;
+  color: #eee;
+  text-align: center;
+  margin-top: $large-spacing;
+  border-top: 1px solid $border-color;
 }
 
-.error-message{
-    color: red;
+.sidebar {
+  padding: $base-padding;
+  background-color: #e9ecef;
+  margin-bottom: $large-spacing;
+
+  h3 {
+    font-size: $medium-spacing;
+    color: $text-color;
+    margin-bottom: $medium-spacing;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: $small-spacing;
+
+      a {
+        color: $link-color;
+        text-decoration: none;
+
+        &:hover {
+          color: $link-hover-color;
+        }
+      }
+    }
+  }
 }
 
-.success-message{
-    color: green;
-}
 
+@include responsive(medium) {
+  .page-header {
+    nav {
+      ul {
+        flex-direction: column;
+        li {
+          margin-right: 0;
+          margin-bottom: $small-spacing;
+        }
+      }
+    }
+  }
+
+  .main-content {
+    padding: $base-padding / 2;
+  }
+
+  .sidebar {
+    padding: $base-padding / 2;
+  }
+}

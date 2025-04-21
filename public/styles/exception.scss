@@ -1,11 +1,14 @@
-.full-width {
+@import 'utility.scss'; 
+
+.special-heading {
+  font-size: 2rem !important; // Override base heading size
+  color: $primary-color;      // Use primary color
+  margin-bottom: $large-spacing;
+}
+
+.full-width-image {
   width: 100% !important;
-}
-
-.no-margin {
-  margin: 0 !important;
-}
-
-.no-padding {
-  padding: 0 !important;
+  height: auto;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
