@@ -34,7 +34,18 @@ type User = {
     password: string;
 }
 
-const currentUser = await getMe();
+let currentUser: User = {
+    _id: "",
+    email: "",
+    password: ""
+  };
+
+try {
+   currentUser = await getMe(); 
+}catch (error) {
+    console.error("Error getting user:", error);
+}
+
 
 
 export async function doLogout() {
@@ -87,7 +98,7 @@ export async function getWishlist(): Promise<ReturnWishlist|[]> {
 }
 
 export async function getItems(query: string): Promise<Item[]> {
-    console.log(`getItems with query = ${query} starts`);
+    console.log(`getItems with query = "${query}" starts`);
     try {
         const res = await fetch(`/items${query}`);
         if (!res.ok) {
