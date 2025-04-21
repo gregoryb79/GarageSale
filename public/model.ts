@@ -40,11 +40,11 @@ let currentUser: User = {
     password: ""
   };
 
-try {
-   currentUser = await getMe(); 
-}catch (error) {
-    console.error("Error getting user:", error);
-}
+// try {
+//    currentUser = await getMe(); 
+// }catch (error) {
+//     console.error("Error getting user:", error);
+// }
 
 
 
@@ -60,6 +60,39 @@ export async function doLogout() {
         console.error("Error logging out:", error);
         throw error;        
     } 
+}
+
+export async function doLogIn(email : string, password: string): Promise<void> {
+
+    console.log(`doLogIn starts with: ${email} - ${password}`);
+    
+    const credentials = {
+        email: email,
+        password: password,
+    };    
+  
+    const body = JSON.stringify(credentials);
+    console.log(`body: ${body}`);
+  
+    try{
+        const res = await fetch(`/auth/login`, {
+            method: "post",
+            body,
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        if (!res.ok) {
+            const message = await res.text(); 
+            console.log(`Failed to log in. Status: ${res.status}. Message: ${message}`);
+            throw new Error(message);
+        }
+        console.log(`loged in with: ${email} - ${password}`);
+        
+    }catch(error){
+        console.error(`Error logging in`, error);  
+        throw error;      
+    }    
 }
 
 
