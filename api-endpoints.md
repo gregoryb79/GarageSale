@@ -12,8 +12,8 @@
 
 ## Users
 - `GET /users/:id` – Get user by ID
-- `GET /users/:id/cart` – Get user's cart
-- `GET /users/:id/wishlist` – Get user's wishlist
+<!-- - `GET /users/:id/cart` – Get user's cart
+- `GET /users/:id/wishlist` – Get user's wishlist --> i don't think we even need it, we allways work with current user
 
 ---
 
@@ -29,4 +29,8 @@
 
 ## Cart
 - `GET /cart` – Get current user's cart
-- `POST
+- `POST /cart` - add item to current user's cart
+
+## Wishlist
+- `GET /wishlist` – Get current user's wishlist
+- `POST /wishlist` - add item to current user's wishlist
