@@ -1,3 +1,5 @@
+import {items as tempItems} from "./devtemps.js"
+
 export type Item = {
     _id: string;
     name: string;
@@ -142,7 +144,7 @@ export async function getItems(query: string): Promise<Item[]> {
         return items; 
     }catch (error) {
         console.error("Error getting items:", error);
-        return [];        
+        return tempItems;        
     } 
 }
 
