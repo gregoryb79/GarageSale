@@ -34,7 +34,7 @@ export async function updateQuantityInWishlist(itemId: string, quantity: number)
 
     try {
         const res = await fetch(`/wishlist`, {
-            method: "put",
+            method: "post",
             body: body,
             headers: {
                 "content-type": "application/json"
