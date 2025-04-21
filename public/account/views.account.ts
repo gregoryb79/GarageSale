@@ -1,14 +1,15 @@
-import {Item, getItems, addToCart, addToWishList} from "../model.js";
-export async function index(itemsList: HTMLElement){
+import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "./model.account.js";
+import {addToCart} from "../home/model.home.js";
+export async function index(wishlist: HTMLElement){
 
-    console.log("Welcome to GarageSale!");
+    console.log("account page");
 
-    await renderItems(""); 
+    await renderItems(); 
 
-    itemsList.addEventListener("click", async (event) => {
+    wishlist.addEventListener("click", async (event) => {
         const target = event.target as HTMLElement;
 
-        const listItem = target.closest("li.listing");
+        const listItem = target.closest("li.wishlist-item");
         if (!listItem) return; 
         
         const itemId = listItem.getAttribute("data-id");
@@ -21,7 +22,7 @@ export async function index(itemsList: HTMLElement){
             if (button.textContent === "Add to Cart") {                
                 console.log(`Adding item ${itemId} to cart...`);
                 try {
-                    await addToCart(itemId);
+                    // await addToCart(itemId);
                     console.log(`Item ${itemId} added to cart successfully.`);
                     alert("Item added to your shopping cart.");
                 } catch (error) {
@@ -31,7 +32,7 @@ export async function index(itemsList: HTMLElement){
             } else if (button.textContent === "Add to Wishlist") {                
                 console.log(`Adding item ${itemId} to wishlist...`);
                 try {
-                    await addToWishList(itemId);
+                    // await addToWishList(itemId);
                     console.log(`Item ${itemId} added to wishlist successfully.`);
                     alert("Item added to your wishlist.");
                 } catch (error) {
@@ -44,32 +45,32 @@ export async function index(itemsList: HTMLElement){
     });
 
 
-    async function renderItems(query: string) {
+    async function renderItems() {
         try{
-            const items = await getItems(query);            
+            const items = await getWishlist();            
             console.log(items);
     
             if(items.length > 0) {              
-               itemsList.innerHTML = items
+                wishlist.innerHTML = items
                     .map((item) => `                                
-                                    <li class="listing" data-id="${item._id}">
-                                        <h3>${item.name}</h3>
-                                        <img src="${item.imageurl}" alt="image of ${item.name}">
-                                        <p>${item.description}</p>
-                                        <p>Price: ${item.price.toFixed(2)}</p>
-                                        <button>Add to Cart</button>
-                                        <button>Add to Wishlist</button>
+                                    <li class="wishlist-item" data-id="${item.itemId}">
+                                        <p>${item.itemName}</p>
+                                        <div class="quantityCluster">
+                                            <button>-</button>
+                                            <p> ${item.quantity} </p>
+                                            <button>+</button>
+                                        </div>                
+                                        <button>Move to Cart</button>
+                                        <button>Delete</button>
                                     </li>
                                     `)
                     .join("\n");
-            }else if (query != ""){
-                itemsList.innerHTML = "<h3>No results for your search...</h3>"
             }else{
-                itemsList.innerHTML = "<h3>Oops, something went wrong, please retry...</h3>"
-            }        
-            
+                wishlist.innerHTML = "<h3>Your wishlist is empty...</h3>";
+            }                
         }catch(error){
             console.error(error);
+            wishlist.innerHTML = "<h3>Oops, something went wrong, please retry...</h3>";
         }     
     }
         

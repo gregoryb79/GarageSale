@@ -12,25 +12,27 @@ export type Item = {
     updatedAt?: string;
   };
 
-type Cart = {
+export type Cart = {
     _id: string;
     userId: string; 
-    items: [{itemId : string,
-        quantity: number}];
+    items: {itemId : string,
+        quantity: number}[];
     createdAt?: string; 
     updatedAt?: string; 
 }
 
-type Wishlist = {
+export type Wishlist = {
     _id: string;
     userId: string; 
-    items: [{itemId : string,
-            quantity: number}];
+    items: {itemId : string,
+            quantity: number}[];
     createdAt?: string; 
     updatedAt?: string; 
 }
+export type ReturnWishlist = { itemId: string, quantity: number, itemName: string }[];
+export type ReturnCart =  {itemId : string, quantity: number, itemName: string}[];
 
-type User = {
+export type User = {
     _id: string;
     email: string;
     password: string;
@@ -98,7 +100,7 @@ export async function doLogIn(email : string, password: string): Promise<void> {
 }
 
 
-export type ReturnCart =  {itemId : string, quantity: number}[];
+
 export async function getCart(): Promise<ReturnCart|[]> {
     console.log("getCart starts");    
     try {
@@ -115,7 +117,6 @@ export async function getCart(): Promise<ReturnCart|[]> {
     } 
 }
 
-export type ReturnWishlist = { itemId: string, quantity: number }[];
 export async function getWishlist(): Promise<ReturnWishlist|[]> {
     console.log("getWishlist starts");    
     try {

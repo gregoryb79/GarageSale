@@ -116,29 +116,35 @@ export const items: Item[] = [
 export const cart: ReturnCart = [
     {
       itemId: "2", // Wireless Bluetooth Earbuds
+      itemName: "Wireless Bluetooth Earbuds",
       quantity: 1,
     },
     {
       itemId: "5", // Portable Phone Charger
+        itemName: "Portable Phone Charger",
       quantity: 2,
     },
     {
-      itemId: "7", // Men's Cotton T-Shirt
+      itemId: "7",
+      itemName : "Men's Cotton T-Shirt", 
       quantity: 3,
     },
   ];
 
   export const wishlist: ReturnWishlist = [
     {
-      itemId: "3", // LED Desk Lamp with USB Charging Port
+      itemId: "3", 
+      itemName: "Desk LED Lamp",
       quantity: 1,
     },
     {
-      itemId: "6", // Ergonomic Office Chair
+      itemId: "6", 
+      itemName: "Ergonomic Office Chair",
       quantity: 1,
     },
     {
-      itemId: "10", // Smart Home Speaker
+      itemId: "10", 
+      itemName: "Smart Home Speaker",
       quantity: 1,
     },
   ];
