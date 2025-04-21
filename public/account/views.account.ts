@@ -1,5 +1,5 @@
-import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "./model.account.js";
-import {addToCart} from "../home/model.home.js";
+import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "../model.wishlist.js";
+import {addToCart} from "../model.cart.js";
 export async function index(wishlist: HTMLElement){
 
     console.log("account page");
@@ -16,29 +16,72 @@ export async function index(wishlist: HTMLElement){
         console.log(`itemId: ${itemId} clicked`);
         
         if (!itemId) return;       
+        const quantityElement = listItem.querySelector("div.quantityCluster p");
+        if (!quantityElement) return; 
+        const quantity = parseInt(quantityElement.textContent || "0", 0);
+        console.log(`Quantity for item ${itemId}: ${quantity}`);
+
         if (target.matches('button')) {
             const button = target as HTMLButtonElement;
             console.log(`Button clicked in item ${itemId}, text: ${button.textContent}`);
-            if (button.textContent === "Add to Cart") {                
+            if (button.textContent === "Move to Cart") {                
                 console.log(`Adding item ${itemId} to cart...`);
                 try {
-                    // await addToCart(itemId);
-                    console.log(`Item ${itemId} added to cart successfully.`);
-                    alert("Item added to your shopping cart.");
+                    await addToCart(itemId,quantity);
+                    console.log(`${quantity} of item ${itemId} added to cart successfully.`);
+                    await deleteFromWishlist(itemId); 
+                    console.log(`Item ${itemId} removed from wishlist after adding to cart.`);
+                    if (quantity > 1){
+                        alert("Items moved to your shopping cart.");
+                    }else{
+                        alert("Item moved to your shopping cart.");
+                    }
+                    await renderItems();
                 } catch (error) {
                     console.error(`Error adding item ${itemId} to cart:`, error);
-                    alert("Failed to add item to cart. Please try again.");
+                    alert("Failed to mpoe to cart. Please try again.");
                 }
-            } else if (button.textContent === "Add to Wishlist") {                
-                console.log(`Adding item ${itemId} to wishlist...`);
+            } else if (button.textContent === "Remove") {                
+                console.log(`Deleting item ${itemId} from wishlist...`);
                 try {
-                    // await addToWishList(itemId);
-                    console.log(`Item ${itemId} added to wishlist successfully.`);
-                    alert("Item added to your wishlist.");
+                    await deleteFromWishlist(itemId);
+                    console.log(`Item ${itemId} deleted from wishlist successfully.`);
+                    await renderItems();
                 } catch (error) {
-                    console.error(`Error adding item ${itemId} to cart:`, error);
-                    alert("Failed to add item to cart. Please try again.");
+                    console.error(`Error deleting item ${itemId} from wishlist:`, error);
+                    alert("Failed to remove item. Please try again.");
                 }
+            } else if (button.textContent === "-") {
+                console.log(`Decreasing quantity of item ${itemId} in wishlist...`);
+                if (quantity > 1){
+                    try {
+                        await updateQuantityInWishlist(itemId, quantity - 1);
+                        quantityElement.textContent = ` ${(quantity - 1).toFixed(0)} `;
+                        console.log(`Quantity of item ${itemId} decreased successfully.`);                        
+                    } catch (error) {
+                        console.error(`Error decreasing quantity of item ${itemId}:`, error);
+                        alert("Failed to decrease quantity. Please try again.");
+                    }
+                }else{
+                    try{
+                        await deleteFromWishlist(itemId);
+                        console.log(`Item ${itemId} deleted from wishlist successfully.`);
+                        await renderItems();
+                    }catch (error) {
+                        console.error(`Error deleting item (q = 0) ${itemId} from wishlist:`, error);
+                        alert("Failed to decrease quantity. Please try again.");
+                    }                    
+                }
+            } else if (button.textContent === "+") {
+                console.log(`Increasing quantity of item ${itemId} in wishlist...`);
+                try {
+                    await updateQuantityInWishlist(itemId, quantity + 1);
+                    quantityElement.textContent = ` ${(quantity + 1).toFixed(0)} `;
+                    console.log(`Quantity of item ${itemId} increased successfully.`);                        
+                } catch (error) {
+                    console.error(`Error increasing quantity of item ${itemId}:`, error);
+                    alert("Failed to increase quantity. Please try again.");
+                }                
             }
         }
         
@@ -61,7 +104,7 @@ export async function index(wishlist: HTMLElement){
                                             <button>+</button>
                                         </div>                
                                         <button>Move to Cart</button>
-                                        <button>Delete</button>
+                                        <button>Remove</button>
                                     </li>
                                     `)
                     .join("\n");

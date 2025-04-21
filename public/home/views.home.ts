@@ -1,4 +1,7 @@
-import {getItems, addToCart, addToWishList} from "./model.home.js";
+import {addToCart} from "../model.cart.js";
+import {getItems} from "../model.items.js";
+import {addToWishList} from "../model.wishlist.js";
+
 export async function index(itemsList: HTMLElement){
 
     console.log("Welcome to GarageSale!");

@@ -29,10 +29,10 @@
 
 ## Cart
 - `GET /cart` – Get current user's cart
-- `POST /cart` - add item to current user's cart
+- `POST /cart` - add/update quantity item to current user's cart
 - `DELETE /cart/:itemId` - remove item from curret users cart
 
 ## Wishlist
 - `GET /wishlist` – Get current user's wishlist
-- `POST /wishlist` - add item to current user's wishlist
+- `POST /wishlist` - add/update quantity item to current user's wishlist
 - `DELETE /wishlist/:itemId` - remove item from curret users wishlist

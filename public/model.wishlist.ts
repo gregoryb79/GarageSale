@@ -1,7 +1,39 @@
-import { get } from "http";
-import {items as tempItems, cart as tempCart, wishlist as tempUserWishlist} from "../devtemps.js"
-import {Item, Cart, Wishlist, ReturnWishlist} from "../model.js"
+import {items as tempItems, cart as tempCart, wishlist as tempUserWishlist} from "./devtemps.js"
+import {getItem} from "./model.items.js"
 
+export type Wishlist = {
+    _id: string;
+    userId: string; 
+    items: {itemId : string,
+            quantity: number}[];
+    createdAt?: string; 
+    updatedAt?: string; 
+}
+
+export async function addToWishList(itemId: string, quantity : number): Promise<void> {
+    console.log(`addToWishList with itemId = "${itemId}" starts`);
+    const body = JSON.stringify({itemId: itemId, quantity: quantity});
+    console.log(`body: ${body}`);
+
+    try {
+        const res = await fetch(`/wishlist`, {
+            method: "post",
+            body: body,
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        if (!res.ok) {
+            const message = await res.text();             
+            throw new Error(`Failed to add item to cart. Status: ${res.status}. Message: ${message}`);
+        }        
+    }catch (error) {
+        console.error("Error adding item to cart:", error);        
+        throw error;        
+    } 
+}
+
+export type ReturnWishlist = { itemId: string, quantity: number, itemName: string }[];
 export async function getWishlist(): Promise<ReturnWishlist|[]> {
     console.log("getWishlist starts");    
     try {
@@ -12,12 +44,22 @@ export async function getWishlist(): Promise<ReturnWishlist|[]> {
         }        
         const wishlist = await res.json() as Wishlist;         
         const items = wishlist.items; 
-        const userWishlist : ReturnWishlist = [];
+        const userWishlist : ReturnWishlist = [];        
         for (const item of items) {
-            const itemId = item.itemId;
-            const quantity = item.quantity;
-            const itemName = await getItemName(itemId);
-            userWishlist.push({itemId, quantity, itemName});
+            try {
+                const itemDetails = await getItem(item.itemId);
+                if (!itemDetails) {
+                    console.error(`Item with ID ${item.itemId} not found.`);
+                    continue;
+                }
+                const itemId = item.itemId;
+                const quantity = item.quantity;
+                const itemName = itemDetails.name;
+                userWishlist.push({itemId, quantity, itemName});
+            }catch (error) {
+                console.error(`Error fetching item details for ID ${item.itemId}:`, error);
+                continue;
+            }                      
         }
         return userWishlist;
 
@@ -34,7 +76,7 @@ export async function updateQuantityInWishlist(itemId: string, quantity: number)
 
     try {
         const res = await fetch(`/wishlist`, {
-            method: "put",
+            method: "post",
             body: body,
             headers: {
                 "content-type": "application/json"
@@ -70,19 +112,6 @@ export async function deleteFromWishlist(itemId: string): Promise<void> {
     } 
 }
 
-async function getItemName(itemId: string): Promise<string> {
-    console.log(`getItemName with itemId = "${itemId}" starts`);
-    try {
-        const res = await fetch(`/items/${itemId}`);
-        if (!res.ok) {
-            const message = await res.text();             
-            throw new Error(`Failed to get item name. Status: ${res.status}. Message: ${message}`);
-        }        
-        const item = await res.json() as Item; 
-        return item.name;
-    }catch (error) {
-        console.error("Error getting item name:", error);
-        return "";        
-    }
-}
+
+
 
