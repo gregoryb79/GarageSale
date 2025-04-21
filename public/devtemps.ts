@@ -1,4 +1,4 @@
-import { Item } from './model'; // Adjust the import path as needed
+import { Item, ReturnCart, ReturnWishlist } from './model'; // Adjust the import path as needed
 
 export const items: Item[] = [
   {
@@ -112,3 +112,33 @@ export const items: Item[] = [
     updatedAt: new Date().toISOString()
   }
 ];
+
+export const cart: ReturnCart = [
+    {
+      itemId: "2", // Wireless Bluetooth Earbuds
+      quantity: 1,
+    },
+    {
+      itemId: "5", // Portable Phone Charger
+      quantity: 2,
+    },
+    {
+      itemId: "7", // Men's Cotton T-Shirt
+      quantity: 3,
+    },
+  ];
+
+  export const wishlist: ReturnWishlist = [
+    {
+      itemId: "3", // LED Desk Lamp with USB Charging Port
+      quantity: 1,
+    },
+    {
+      itemId: "6", // Ergonomic Office Chair
+      quantity: 1,
+    },
+    {
+      itemId: "10", // Smart Home Speaker
+      quantity: 1,
+    },
+  ];

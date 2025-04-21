@@ -1,9 +1,47 @@
-import {Item, getItems} from "../model.js";
+import {Item, getItems, addToCart, addToWishList} from "../model.js";
 export async function index(itemsList: HTMLElement){
 
     console.log("Welcome to GarageSale!");
 
     await renderItems(""); 
+
+    itemsList.addEventListener("click", async (event) => {
+        const target = event.target as HTMLElement;
+
+        const listItem = target.closest("li.listing");
+        if (!listItem) return; 
+        
+        const itemId = listItem.getAttribute("data-id");
+        console.log(`itemId: ${itemId} clicked`);
+        
+        if (!itemId) return;       
+        if (target.matches('button')) {
+            const button = target as HTMLButtonElement;
+            console.log(`Button clicked in item ${itemId}, text: ${button.textContent}`);
+            if (button.textContent === "Add to Cart") {                
+                console.log(`Adding item ${itemId} to cart...`);
+                try {
+                    await addToCart(itemId);
+                    console.log(`Item ${itemId} added to cart successfully.`);
+                    alert("Item added to your shopping cart.");
+                } catch (error) {
+                    console.error(`Error adding item ${itemId} to cart:`, error);
+                    alert("Failed to add item to cart. Please try again.");
+                }
+            } else if (button.textContent === "Add to Wishlist") {                
+                console.log(`Adding item ${itemId} to wishlist...`);
+                try {
+                    await addToWishList(itemId);
+                    console.log(`Item ${itemId} added to wishlist successfully.`);
+                    alert("Item added to your wishlist.");
+                } catch (error) {
+                    console.error(`Error adding item ${itemId} to cart:`, error);
+                    alert("Failed to add item to cart. Please try again.");
+                }
+            }
+        }
+        
+    });
 
 
     async function renderItems(query: string) {
