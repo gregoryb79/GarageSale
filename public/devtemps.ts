@@ -1,4 +1,6 @@
-import { Item, ReturnCart, ReturnWishlist } from './model'; // Adjust the import path as needed
+import { Item } from './model.items.js';
+import { ReturnCart } from './model.cart.js';
+import { ReturnWishlist } from './model.wishlist.js';
 
 export const items: Item[] = [
   {
@@ -118,16 +120,19 @@ export const cart: ReturnCart = [
       itemId: "2", // Wireless Bluetooth Earbuds
       itemName: "Wireless Bluetooth Earbuds",
       quantity: 1,
+      itemPrice: 59.99,
     },
     {
       itemId: "5", // Portable Phone Charger
         itemName: "Portable Phone Charger",
       quantity: 2,
+      itemPrice: 25.49,
     },
     {
       itemId: "7",
       itemName : "Men's Cotton T-Shirt", 
       quantity: 3,
+      itemPrice: 14.99,
     },
   ];
 

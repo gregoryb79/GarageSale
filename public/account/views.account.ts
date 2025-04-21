@@ -1,5 +1,5 @@
-import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "./model.account.js";
-import {addToCart} from "../home/model.home.js";
+import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "../model.wishlist.js";
+import {addToCart} from "../model.cart.js";
 export async function index(wishlist: HTMLElement){
 
     console.log("account page");
@@ -41,7 +41,7 @@ export async function index(wishlist: HTMLElement){
                     console.error(`Error adding item ${itemId} to cart:`, error);
                     alert("Failed to mpoe to cart. Please try again.");
                 }
-            } else if (button.textContent === "Delete") {                
+            } else if (button.textContent === "Remove") {                
                 console.log(`Deleting item ${itemId} from wishlist...`);
                 try {
                     await deleteFromWishlist(itemId);
@@ -104,7 +104,7 @@ export async function index(wishlist: HTMLElement){
                                             <button>+</button>
                                         </div>                
                                         <button>Move to Cart</button>
-                                        <button>Delete</button>
+                                        <button>Remove</button>
                                     </li>
                                     `)
                     .join("\n");

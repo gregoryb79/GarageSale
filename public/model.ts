@@ -1,36 +1,12 @@
 import {items as tempItems, cart as tempCart, wishlist as tempWishlist} from "./devtemps.js"
 
-export type Item = {
-    _id: string;
-    name: string;
-    description: string;
-    price: number;
-    imageurl: string;
-    stock: number;
-    category: string
-    createdAt?: string;
-    updatedAt?: string;
-  };
 
-export type Cart = {
-    _id: string;
-    userId: string; 
-    items: {itemId : string,
-        quantity: number}[];
-    createdAt?: string; 
-    updatedAt?: string; 
-}
 
-export type Wishlist = {
-    _id: string;
-    userId: string; 
-    items: {itemId : string,
-            quantity: number}[];
-    createdAt?: string; 
-    updatedAt?: string; 
-}
-export type ReturnWishlist = { itemId: string, quantity: number, itemName: string }[];
-export type ReturnCart =  {itemId : string, quantity: number, itemName: string}[];
+
+
+
+
+
 
 export type User = {
     _id: string;
