@@ -2,7 +2,7 @@ import {addToCart} from "../model.cart.js";
 import {getItems} from "../model.items.js";
 import {addToWishList} from "../model.wishlist.js";
 
-export async function index(itemsList: HTMLElement){
+export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement) {
 
     console.log("Welcome to GarageSale!");
 
@@ -44,6 +44,20 @@ export async function index(itemsList: HTMLElement){
             }
         }
         
+    });
+
+    searchForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(searchForm);
+        const query = formData.get("search") as string;        
+        console.log(`Searching for: ${query}`);
+
+        try{
+            await renderItems(`?search=${query}`);
+        } catch (error) {
+            console.error("Error rendering items:", error);
+        }
+                        
     });
 
 
