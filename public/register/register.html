@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Garage Sale</title>
-    <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="../styles/composition.css" />
     <link rel="stylesheet" href="../styles/utility.css" />
     <link rel="stylesheet" href="../styles/block.css" />
     <link rel="stylesheet" href="../styles/exception.css" />
 </head>
     <body>
-    <div class="container">
-        <h1>Register</h1>
-        <form id="registrationForm">
+        <div class="main-container">
+             <div class="container">
+             <h1>Register</h1>
+         <form id="registrationForm">
             <input name="email" type="email" placeholder="Email" required>
             <input name="password" type="password" placeholder="Password" required>
             <button type="submit">Register</button>
@@ -23,6 +23,10 @@
         </div>
     </div>
 
+        <footer class="site-footer">
+            <p>&copy; 2025 Garage Sale. All rights reserved.</p>
+        </footer>
+        </div>
     <script type="module">
         import { register } from "./views.js";
 
