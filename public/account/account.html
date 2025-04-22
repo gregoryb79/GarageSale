@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account - Garage Sale</title>
-    <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="../styles/composition.css" />
     <link rel="stylesheet" href="../styles/utility.css" />
     <link rel="stylesheet" href="../styles/block.css" />
     <link rel="stylesheet" href="../styles/exception.css" />
 </head>
 <body>
+    <div class="main-container">
     <div class="sidebar">
         <button onclick="location.href='./account.html'">Wishlist</button>
         <button onclick="location.href='../cart/cart.html'">Cart</button>
@@ -44,6 +44,11 @@
                 <button>Delete</button>
             </li>
          </ul>
+
+         <footer class="site-footer">
+            <p>&copy; 2025 Garage Sale. All rights reserved.</p>
+        </footer>
+    </div>
 
         <script type="module">
             import {index} from "./views.account.js";
