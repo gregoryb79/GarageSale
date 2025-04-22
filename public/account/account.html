@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Garage Sale</title>
+    <link rel="stylesheet" href="../styles/composition.css" />
+    <link rel="stylesheet" href="../styles/utility.css" />
+    <link rel="stylesheet" href="../styles/block.css" />
+    <link rel="stylesheet" href="../styles/exception.css" />
+</head>
+<body>
+    <div class="main-container">
+    <div class="sidebar">
+        <button onclick="location.href='./account.html'">Wishlist</button>
+        <button onclick="location.href='../cart/cart.html'">Cart</button>
+        <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
+        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button>
+    </div>
+    <div class="content">
+        <div class="header">
+            <button class="back-button" onclick="location.href='../home/home.html'">Back to Home</button>
+            <h1>My Wishlist</h1>
+        </div>
+        <ul class="wishlist" id="wishlist"> 
+            <li class="wishlist-item">
+                <p>Item from Wishlist 1</p>
+                <div class="quantityCluster">
+                    <button>-</button>
+                    <p> 1 </p>
+                    <button>+</button>
+                </div>                
+                <button>Move to Cart</button>
+                <button>Delete</button>
+            </li>
+            <li class="wishlist-item">
+                <p>Another Item from Wishlist 1</p>
+                <div class="quantityCluster">
+                    <button>-</button>
+                    <p> 2 </p>
+                    <button>+</button>
+                </div>                
+                <button>Move to Cart</button>
+                <button>Delete</button>
+            </li>
+         </ul>
+
+         <footer class="site-footer">
+            <p>&copy; 2025 Garage Sale. All rights reserved.</p>
+        </footer>
+    </div>
+
+        <script type="module">
+            import {index} from "./views.account.js";
+
+            index(document.getElementById("wishlist"));
+        </script>
+</body>
+</html>

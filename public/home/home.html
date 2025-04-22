@@ -4,40 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Garage Sale</title>
-    <link rel="stylesheet" href="/public/styles/styles.css" />
-    <link rel="stylesheet" href="/public/styles/composition.css" />
-    <link rel="stylesheet" href="/public/styles/block.css" />
-    <link rel="stylesheet" href="/public/styles/exception.css" />
+    <link rel="stylesheet" href="../styles/composition.css" />
+    <link rel="stylesheet" href="../styles/utility.css" />
+    <link rel="stylesheet" href="../styles/block.css" />
+    <link rel="stylesheet" href="../styles/exception.css" />
 </head>
 <body>
-    <div class="sidebar">
-        <button onclick="location.href='/public/index.html'">Exit</button>
-        <button onclick="location.href='account.html'">My Account</button>
+    <div class="main-container">
+        <div class="sidebar">
+        <button onclick="location.href='../index.html'">Exit</button>
+        <button onclick="location.href='../account/account.html'">My Account</button>
     </div>
     <div class="content">
         <div class="header">
             <h1>All Items</h1>
-            </div>
-
-        <div class="listing">
-            <h3>Item Name 1</h3>
-            <p>Description of item 1.</p>
-            <p>Price: $XX.XX</p>
-            <button>Add to Cart</button>
-            <button>Add to Wishlist</button>
         </div>
-
-        <div class="listing">
-            <h3>Another Item</h3>
-            <p>More details about this item.</p>
-            <p>Price: $YY.YY</p>
-            <button>Add to Cart</button>
-            <button>Add to Wishlist</button>
+        <div class="search-container">
+            <form class="search-bar" id="searchForm" name="searchForm" role="search">
+                <input type="text" class="search-input" id="searchInput" name="search" placeholder="Search for items...">
+                <button type="submit" class="search-button">Search</button>
+            </form>
         </div>
-        </div>
+        
+        <ul class="itemsList" id="itemsList">
+            <li class="listing">
+                <h3>Item Name 1</h3>
+                <img src="#" alt="image of item 1" />
+                <p>Description of item 1.</p>
+                <p>Price: $XX.XX</p>
+                <button>Add to Cart</button>
+                <button>Add to Wishlist</button>
+            </li>
+            <li class="listing">
+                <h3>Another Item</h3> 
+                <img src="#" alt="image of item 2" />               
+                <p>More details about this item.</p>
+                <p>Price: $YY.YY</p>
+                <button>Add to Cart</button>
+                <button>Add to Wishlist</button>
+            </li>
+        </ul>
+     <footer class="site-footer">
+            <p>&copy; 2025 Garage Sale. All rights reserved.</p>
+        </footer>
+    </div>
+    <script type="module">
+        import {index} from "./views.home.js";
 
-    <script>
-
+        index(document.getElementById("itemsList"),document.forms["searchForm"]);
     </script>
 </body>
 </html>

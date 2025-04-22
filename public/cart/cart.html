@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Garage Sale</title>
+    <link rel="stylesheet" href="../styles/composition.css" />
+    <link rel="stylesheet" href="../styles/utility.css" />
+    <link rel="stylesheet" href="../styles/block.css" />
+    <link rel="stylesheet" href="../styles/exception.css" />
+</head>
+<body>
+    <div class="main-container">
+    <div class="sidebar">
+        <button onclick="location.href='../account/account.html'">Wishlist</button>
+        <button onclick="location.href='./cart.html'">Cart</button>
+        <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
+        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button>
+    </div>
+    <div class="content">
+        <div class="header">
+            <button class="back-button" onclick="location.href='../account/account.html'">Back to Wishlist</button>
+            <h1>My Cart</h1>
+        </div>
+        <ul class="cart" id="cart">
+            <li class="cart-item">
+                <p>Item in Cart 1 - Price: $XX.XX</p>
+                <button>Remove</button>
+                <div class="quantityCluster">
+                    <button>-</button>
+                    <p> 1 </p>
+                    <button>+</button>
+                </div> 
+            </li>
+            <li class="cart-item">
+                Another item in your cart - Price: $YY.YY <button>Remove</button>
+            </li>
+        </ul>
+
+        <div class="total-price">
+            <p id="total-price">Total Price: $ZZ.ZZ</p>
+        </div>
+
+        <div class="payment-section">
+            <h2>Payment Information</h2>
+            <input type="text" placeholder="Card Number">
+            <input type="text" placeholder="Expiry Date (MM/YY)">
+            <input type="text" placeholder="CVV">
+            <button onclick="alert('Payment Processing (Not Implemented)')">Pay Now</button>
+            <div id="paymentNotification" class="notification"></div>
+        </div>
+    
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Garage Sale. All rights reserved.</p>
+    </footer>
+    </div>
+
+    <script type="module">
+        import {index} from "./views.cart.js";
+
+        index(document.getElementById("cart"), document.getElementById("total-price")); 
+    </script>
+</body>
+</html>
