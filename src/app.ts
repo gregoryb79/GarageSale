@@ -8,7 +8,7 @@ import notFound from './middlewares/notFound';
 import errorHandler from "./middlewares/errorHandler";
 import itemsRouter from './routers/items.routes';
 import cartRouter from './routers/cart.routes';
-import usersRouter from './routers/users.routes';
+import userRouter from './routers/users.routes'
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,7 +28,7 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 app.use('/api/auth', authRouter);
 app.use('/api/items', itemsRouter);
 app.use('/api/cart', cartRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/users', userRouter);
 app.use(express.static(path.resolve(__dirname, "..", "public")));
 app.use(notFound);
 app.use(errorHandler);
