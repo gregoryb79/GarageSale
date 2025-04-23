@@ -6,7 +6,7 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
   console.log("getCart starts");
 
   try {
-    const cart = await Cart.findOne({ user: req.user._id }).populate('items.itemId', 'name price');
+    const cart = await Cart.findOne({ user: req.user!._id }).populate('items.itemId', 'name price');
 
     if (!cart) {
       console.log("Cart not found for user:", req.user._id);
@@ -18,8 +18,8 @@ export const getCart = async (req: Request, res: Response, next: NextFunction) =
     const formattedCart = cart.items.map(item => ({
       itemId: item.itemId._id,
       quantity: item.quantity,
-      itemName: item.itemId.name,
-      itemPrice: item.itemId.price,
+      itemName: (item.itemId as any).name,
+      itemPrice: (item.itemId as any).price,
     }));
 
     console.log("Formatted cart:", formattedCart);
@@ -45,10 +45,10 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
         throw new Error('Item not found');
       }
   
-      let cart = await Cart.findOne({ user: req.user._id });
+      let cart = await Cart.findOne({ user: req.user!._id });
   
       if (!cart) {
-        cart = new Cart({ user: req.user._id, items: [] });
+        cart = new Cart({ user: req.user!._id, items: [] });
       }
   
       const existingItem = cart.items.find(i => i.itemId.toString() === itemId);
