@@ -14,8 +14,8 @@ export const getWishlistByUserId = async (req: Request, res: Response, next: Nex
 
     const formattedWishlist = wishlist.items.map(item => ({
       itemId: item.itemId._id,
-      itemName: item.itemId.name,
-      itemPrice: item.itemId.price,
+      itemName: (item.itemId as any).name,
+      itemPrice: (item.itemId as any).price,
     }));
 
     res.status(200).json(formattedWishlist);
