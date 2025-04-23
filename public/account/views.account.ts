@@ -89,6 +89,14 @@ export async function index(wishlist: HTMLElement){
 
 
     async function renderItems() {
+        
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error("No token found in local storage. User is not logged in.");
+            wishlist.innerHTML = "<h3>Please log in to see your wishlist...</h3>";
+            return;
+        }
+
         try{
             const items = await getWishlist();            
             console.log(items);

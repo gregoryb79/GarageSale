@@ -2,6 +2,14 @@ import {onLoginFormSubmit} from "./controller.js";
 
 export function logIn(loginForm : HTMLFormElement){
 
+    console.log("Welcome to GarageSale! Please log in to continue.");
+    const token = localStorage.getItem('token');
+    if (token){
+        console.log("Token found in local storage. Redirecting to home page.");
+        window.location.replace("./home/home.html");
+        return;
+    }
+
     loginForm.addEventListener("submit", async function(e){
         e.preventDefault();         
 
