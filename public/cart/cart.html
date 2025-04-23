@@ -12,14 +12,16 @@
 <body>
     <div class="main-container">
     <div class="sidebar">
+        <button id="exitButton">Exit</button>
+        <button onclick="location.href='../home/home.html'">Home</button>
         <button onclick="location.href='../account/account.html'">Wishlist</button>
-        <button onclick="location.href='./cart.html'">Cart</button>
-        <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
-        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button>
+        <button onclick="location.href='../cart/cart.html'">Cart</button> 
+        <!-- <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
+        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button> -->
     </div>
     <div class="content">
         <div class="header">
-            <button class="back-button" onclick="location.href='../account/account.html'">Back to Wishlist</button>
+            <!-- <button class="back-button" onclick="location.href='../account/account.html'">Back to Wishlist</button> -->
             <h1>My Cart</h1>
         </div>
         <ul class="cart" id="cart">
@@ -60,8 +62,10 @@
 
     <script type="module">
         import {index} from "./views.cart.js";
+        import {exit} from "../utility.js";
 
         index(document.getElementById("cart"), document.getElementById("total-price")); 
+        exit(document.getElementById("exitButton"));
     </script>
 </body>
 </html>

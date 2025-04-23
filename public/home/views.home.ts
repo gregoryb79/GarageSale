@@ -1,9 +1,8 @@
 import {addToCart} from "../model.cart.js";
 import {getItems} from "../model.items.js";
-import { doLogOut } from "../model.js";
 import {addToWishList} from "../model.wishlist.js";
 
-export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement, exitButton: HTMLButtonElement) {
+export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement) {
 
     console.log("Welcome to GarageSale!");
 
@@ -60,15 +59,6 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement,
         }
                         
     });
-
-    exitButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-        console.log("Exit button clicked, redirecting to login page...");
-        doLogOut();
-        window.location.href = "../index.html"; 
-    });
-
-
 
     async function renderItems(query: string) {
         try{
