@@ -44,6 +44,8 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
 };
 
 export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    console.log(`loginUser called with body: ${JSON.stringify(req.body)}`);
+    
     try {
       const { email, password } = req.body;
   

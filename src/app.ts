@@ -25,10 +25,10 @@ app.use((req, _, next) => {
 app.use(json());
 app.use(cookieParser(process.env.SESSION_SECRET));
 
-app.use('/api/auth', authRouter);
-app.use('/api/items', itemsRouter);
-app.use('/api/cart', cartRouter);
-app.use('/api/users', userRouter);
+app.use('/auth', authRouter);
+app.use('/items', itemsRouter);
+app.use('/cart', cartRouter);
+app.use('/users', userRouter);
 app.use(express.static(path.resolve(__dirname, "..", "public")));
 app.use(notFound);
 app.use(errorHandler);
