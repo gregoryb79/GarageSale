@@ -1,4 +1,4 @@
-## Module 3 Personal Final Project
+## Module 3 Final Project
 
 GarageSale is a full-stack web store application built with Node.js, MongoDB, and CUBE/MVC. 
 It allows users to browse a catalog of items, add products to their shopping cart or wishlist, and moving items from wishlist to cart.  
