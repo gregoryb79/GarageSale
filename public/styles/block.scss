@@ -38,10 +38,13 @@ form {
   border-radius: $border-radius;
   border: none;
   cursor: pointer;
+  color: white;
+  background-color: $color-primary;
   transition: $transition-property $transition-duration $transition-timing-function;
 
-  &:hover {
+    &:hover {
     opacity: 0.8;
+    transform: scale(1.05);
   }
 }
 
@@ -84,10 +87,6 @@ button[type="submit"] {
   border-radius: $border-radius;
 }
 
-.cart{
-  border: 2px solid $color-teal;
-}
-
 ul {
   list-style: none;
   padding: 0;
@@ -119,7 +118,7 @@ li {
     img {
       max-height: 200px;
       object-fit: cover; // Ensure images fit within the container
-      width: 100%;
+      width: auto;
     }
 
     h3 {
@@ -144,6 +143,8 @@ li {
 
 .wishlist, .cart {
   padding-top: 1rem;
+  border: 3px solid ;
+  color: #c1bc7c;
 
   &-item {
     @extend li;
