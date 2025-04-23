@@ -40,3 +40,9 @@ export async function doLogIn(email : string, password: string): Promise<void> {
         throw error;      
     }    
 }
+
+export function doLogOut(){
+    console.log(`doLogOut starts`);
+    localStorage.removeItem('token');
+    console.log(`Token removed from local storage`);   
+}
