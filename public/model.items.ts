@@ -35,7 +35,8 @@ export async function getItems(query: string): Promise<Item[]> {
             throw new Error(`Failed to get items. Status: ${res.status}. Message: ${message}`);
         }        
         const items = await res.json() as Item[]; 
-        return items; 
+
+        return items.filter((item: { category: string }) => ((item.category !== 'Testing') && (item.category !== 'Test'))); 
     }catch (error) {
         console.error("Error getting items:", error);
         return [];        
