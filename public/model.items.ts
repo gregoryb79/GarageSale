@@ -41,6 +41,6 @@ export async function getItems(query: string): Promise<Item[]> {
         return items; 
     }catch (error) {
         console.error("Error getting items:", error);
-        return tempItems;        
+        return [];        
     } 
 }

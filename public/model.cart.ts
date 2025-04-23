@@ -13,9 +13,15 @@ export type Cart = {
 
 export type ReturnCart =  {itemId : string, quantity: number, itemName: string, itemPrice: number}[];
 export async function getCart(): Promise<ReturnCart|[]> {
-    console.log("getWishlist starts");    
+    console.log("getCart starts"); 
+    const token = localStorage.getItem('token');
     try {
-        const res = await fetch(`/cart`);
+        const res = await fetch(`/cart`, {
+            headers: {
+                "Authorization": `Bearer ${token}`, 
+                "content-type": "application/json"
+            }
+        });
         if (!res.ok) {
             const message = await res.text();             
             throw new Error(`Failed to get cart. Status: ${res.status}. Message: ${message}`);
@@ -44,13 +50,14 @@ export async function getCart(): Promise<ReturnCart|[]> {
         return userCart;
 
     }catch (error) {
-        // console.error("Error getting wishlist:", error);
-        return tempCart;        
+        console.error("Error getting wishlist:", error);
+        return [];        
     } 
 }
 
 export async function addToCart(itemId: string,quantity : number): Promise<void> {
     console.log(`addToCart with itemId = "${itemId}" starts`);
+    const token = localStorage.getItem('token');
     const body = JSON.stringify({itemId: itemId, quantity: quantity});
     console.log(`body: ${body}`);
 
@@ -59,6 +66,7 @@ export async function addToCart(itemId: string,quantity : number): Promise<void>
             method: "post",
             body: body,
             headers: {
+                "Authorization": `Bearer ${token}`,
                 "content-type": "application/json"
             }
         });
@@ -76,12 +84,14 @@ export async function updateQuantityInCart(itemId: string, quantity: number): Pr
     console.log(`updateQuantityInCart with itemId = "${itemId}" and quantity = "${quantity}" starts`);
     const body = JSON.stringify({itemId: itemId, quantity: quantity});
     console.log(`body: ${body}`);
+    const token = localStorage.getItem('token');
 
     try {
         const res = await fetch(`/cart`, {
             method: "post",
             body: body,
             headers: {
+                "Authorization": `Bearer ${token}`,
                 "content-type": "application/json"
             }
         });
@@ -96,12 +106,14 @@ export async function updateQuantityInCart(itemId: string, quantity: number): Pr
 }
 
 export async function deleteFromCart(itemId: string): Promise<void> {
-    console.log(`deleteFromCart with itemId = "${itemId}" starts`);    ;
+    console.log(`deleteFromCart with itemId = "${itemId}" starts`);
+    const token = localStorage.getItem('token');
 
     try {
         const res = await fetch(`/cart/${itemId}`, {
             method: "delete",           
             headers: {
+                "Authorization": `Bearer ${token}`,
                 "content-type": "application/json"
             }
         });

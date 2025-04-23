@@ -26,8 +26,8 @@ export async function onLoginFormSubmit(formData: FormData): Promise<boolean> {
         await doLogIn(email,password); 
         return true;       
     } catch (error){
-        console.error(`failed to log in with: ${email} - ${password}, error: ${error}`);        
-        throw new Error("Wrong Credentials");
+        console.error(`failed to log in with: ${email} - ${password}, error: ${error}`);                
+        throw new Error(error.message || "Wrong Credentials");
     }        
      
    

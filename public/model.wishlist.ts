@@ -14,12 +14,14 @@ export async function addToWishList(itemId: string, quantity : number): Promise<
     console.log(`addToWishList with itemId = "${itemId}" starts`);
     const body = JSON.stringify({itemId: itemId, quantity: quantity});
     console.log(`body: ${body}`);
+    const token = localStorage.getItem('token');
 
     try {
         const res = await fetch(`/wishlist`, {
             method: "post",
             body: body,
             headers: {
+                "Authorization": `Bearer ${token}`,
                 "content-type": "application/json"
             }
         });
@@ -36,8 +38,15 @@ export async function addToWishList(itemId: string, quantity : number): Promise<
 export type ReturnWishlist = { itemId: string, quantity: number, itemName: string }[];
 export async function getWishlist(): Promise<ReturnWishlist|[]> {
     console.log("getWishlist starts");    
+    const token = localStorage.getItem('token');
+
     try {
-        const res = await fetch(`/wishlist`);
+        const res = await fetch(`/wishlist`, {
+            headers: {
+                "Authorization": `Bearer ${token}`, // Include the token
+                "content-type": "application/json"
+            }
+        });
         if (!res.ok) {
             const message = await res.text();             
             throw new Error(`Failed to get wishlist. Status: ${res.status}. Message: ${message}`);
@@ -64,8 +73,8 @@ export async function getWishlist(): Promise<ReturnWishlist|[]> {
         return userWishlist;
 
     }catch (error) {
-        // console.error("Error getting wishlist:", error);
-        return tempUserWishlist;        
+        console.error("Error getting wishlist:", error);
+        return [];        
     } 
 }
 
@@ -73,12 +82,14 @@ export async function updateQuantityInWishlist(itemId: string, quantity: number)
     console.log(`updateQuantityInWishlist with itemId = "${itemId}" and quantity = "${quantity}" starts`);
     const body = JSON.stringify({itemId: itemId, quantity: quantity});
     console.log(`body: ${body}`);
+    const token = localStorage.getItem('token');
 
     try {
         const res = await fetch(`/wishlist`, {
             method: "post",
             body: body,
             headers: {
+                "Authorization": `Bearer ${token}`,
                 "content-type": "application/json"
             }
         });
@@ -93,12 +104,14 @@ export async function updateQuantityInWishlist(itemId: string, quantity: number)
 }
 
 export async function deleteFromWishlist(itemId: string): Promise<void> {
-    console.log(`deleteFromWishlist with itemId = "${itemId}" starts`);    ;
+    console.log(`deleteFromWishlist with itemId = "${itemId}" starts`);
+    const token = localStorage.getItem('token');
 
     try {
         const res = await fetch(`/wishlist/${itemId}`, {
             method: "delete",           
             headers: {
+                "Authorization": `Bearer ${token}`,
                 "content-type": "application/json"
             }
         });
