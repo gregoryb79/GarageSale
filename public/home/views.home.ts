@@ -90,7 +90,7 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement,
                                         <h3>${item.name}</h3>
                                         <img src="${item.imageurl}" alt="image of ${item.name}">
                                         <p>${item.description}</p>
-                                        <p>Price: ${item.price.toFixed(2)}</p>
+                                        <p>Price: $${item.price.toFixed(2)}</p>
                                         <button>Add to Cart</button>
                                         <button>Add to Wishlist</button>
                                     </li>
