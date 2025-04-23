@@ -1,8 +1,9 @@
 import {addToCart} from "../model.cart.js";
 import {getItems} from "../model.items.js";
+import { doLogOut } from "../model.js";
 import {addToWishList} from "../model.wishlist.js";
 
-export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement) {
+export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement, exitButton: HTMLButtonElement) {
 
     console.log("Welcome to GarageSale!");
 
@@ -39,7 +40,7 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement)
                     alert("Item added to your wishlist.");
                 } catch (error) {
                     console.error(`Error adding item ${itemId} to cart:`, error);
-                    alert("Failed to add item to cart. Please try again.");
+                    alert("Failed to add item to wishlist. Please try again.");
                 }
             }
         }
@@ -59,6 +60,14 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement)
         }
                         
     });
+
+    exitButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+        console.log("Exit button clicked, redirecting to login page...");
+        doLogOut();
+        window.location.href = "../index.html"; 
+    });
+
 
 
     async function renderItems(query: string) {

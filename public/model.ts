@@ -20,14 +20,29 @@ export async function doLogIn(email : string, password: string): Promise<void> {
             }
         });
         if (!res.ok) {
-            const message = await res.text(); 
-            console.log(`Failed to log in. Status: ${res.status}. Message: ${message}`);
-            throw new Error(message);
+            const errorResponse = await res.json(); 
+            console.log(`Failed to log in. Status: ${res.status}. Message: ${errorResponse.message}`);
+            throw new Error(errorResponse.message);
         }
-        console.log(`loged in with: ${email} - ${password}`);
+        const data = await res.json();
+        console.log(`loged in with: ${email} - ${password}, Response:`, data);
+
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+            console.log(`Token stored in local storage: ${data.token}`);
+        } else {
+            console.error('No token received from the server');
+            throw new Error('No token received from the server');
+        }        
         
     }catch(error){
         console.error(`Error logging in`, error);  
         throw error;      
     }    
+}
+
+export function doLogOut(){
+    console.log(`doLogOut starts`);
+    localStorage.removeItem('token');
+    console.log(`Token removed from local storage`);   
 }

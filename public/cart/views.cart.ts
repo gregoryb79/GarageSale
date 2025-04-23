@@ -1,5 +1,5 @@
 // import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "./model.account.js";
-import {getCart, ReturnCart, deleteFromCart,updateQuantityInCart} from "../model.cart.js";
+import {getCart, deleteFromCart, addToCart} from "../model.cart.js";
 
 export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
 
@@ -40,7 +40,7 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
                 console.log(`Decreasing quantity of item ${itemId} in cart...`);
                 if (quantity > 1){
                     try {
-                        await updateQuantityInCart(itemId, quantity - 1);                        
+                        await addToCart(itemId, (-1));                        
                         console.log(`Quantity of item ${itemId} decreased successfully.`); 
                         await renderItems();
                     } catch (error) {
@@ -58,9 +58,9 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
                     }                    
                 }
             } else if (button.textContent === "+") {
-                console.log(`Increasing quantity of item ${itemId} in wishlist...`);
+                console.log(`Increasing quantity of item ${itemId} in cart...`);
                 try {
-                    await updateQuantityInCart(itemId, quantity + 1);                    
+                    await addToCart(itemId,1);                    
                     console.log(`Quantity of item ${itemId} increased successfully.`);                        
                     await renderItems();
                 } catch (error) {
@@ -73,7 +73,15 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
     });
 
 
-    async function renderItems() {               
+    async function renderItems() {  
+         
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error("No token found in local storage. User is not logged in.");
+            cart.innerHTML = "<h3>Please log in to see your cart...</h3>";
+            return;
+        }
+
         try {
             const items = await getCart();
             console.log(items);

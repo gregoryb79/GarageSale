@@ -53,6 +53,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         res.status(400);
         throw new Error('Please provide email and password');
       }
+      console.log (`email: ${email}, password: ${password}`);
   
       const user = await User.findOne({ email });
   
@@ -60,6 +61,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         res.status(401);
         throw new Error('Invalid email or password');
       }
+      console.log(`user found: ${user}`);
   
       const isPasswordValid = await bcrypt.compare(password, user.hashpassword);
   
@@ -67,6 +69,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         res.status(401);
         throw new Error('Invalid email or password');
       }
+      console.log(`Password is valid`);
   
       const token = jwt.sign(
         { id: user._id },
@@ -81,6 +84,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
       });
   
     } catch (error) {
+      console.error(`Error in loginUser: ${error}`);
       next(error);
     }
   };

@@ -20,11 +20,21 @@ export async function doRegister(email : string, password: string): Promise<void
             }
         });
         if (!res.ok) {
-            const message = await res.text(); 
-            console.log(`Failed to register. Status: ${res.status}. Message: ${message}`);
-            throw new Error(message);
+            const errorResponse = await res.json(); 
+            console.log(`Failed to register. Status: ${res.status}. Message: ${errorResponse.message}`);
+            throw new Error(errorResponse.message);
         }
-        console.log(`Registered with: ${userInfo.email} - ${userInfo.password}`);        
+        const data = await res.json();
+        console.log(`loged in with: ${email} - ${password}, Response:`, data);
+
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+            console.log(`Token stored in local storage: ${data.token}`);
+        } else {
+            console.error('No token received from the server');
+            throw new Error('No token received from the server');
+        } 
+        console.log(`Registered and logged in with: ${userInfo.email} - ${userInfo.password}`);        
     }catch(error){
         console.error(`Error registering, throwing error: ${error}`);  
         throw error;      

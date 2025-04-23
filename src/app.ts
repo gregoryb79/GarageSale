@@ -8,6 +8,7 @@ import notFound from './middlewares/notFound';
 import errorHandler from "./middlewares/errorHandler";
 import itemsRouter from './routers/items.routes';
 import cartRouter from './routers/cart.routes';
+import wishlistRouter from './routers/wishlist.routes';
 import userRouter from './routers/users.routes'
 import dotenv from 'dotenv';
 
@@ -28,6 +29,7 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 app.use('/auth', authRouter);
 app.use('/items', itemsRouter);
 app.use('/cart', cartRouter);
+app.use('/wishlist', wishlistRouter);
 app.use('/users', userRouter);
 app.use(express.static(path.resolve(__dirname, "..", "public")));
 app.use(notFound);
