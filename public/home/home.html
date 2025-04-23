@@ -28,6 +28,8 @@
                 <button type="submit" class="search-button">Search</button>
             </form>
         </div>
+
+        <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
         
         <ul class="itemsList" id="itemsList">
             <li class="listing">
@@ -58,7 +60,7 @@
         import {index} from "./views.home.js";
         import {exit} from "../utility.js";
 
-        index(document.getElementById("itemsList"),document.forms["searchForm"]);
+        index(document.getElementById("itemsList"),document.forms["searchForm"],document.getElementById("loadingSpinner"));
         exit(document.getElementById("exitButton"));
         
     </script>

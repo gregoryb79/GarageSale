@@ -39,6 +39,8 @@
             </li>
         </ul>
 
+        <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
+
         <div class="total-price">
             <p id="total-price">Total Price: $0.00</p>
         </div>
@@ -64,7 +66,7 @@
         import {index} from "./views.cart.js";
         import {exit} from "../utility.js";
 
-        index(document.getElementById("cart"), document.getElementById("total-price")); 
+        index(document.getElementById("cart"), document.getElementById("total-price"),document.getElementById("loadingSpinner")); 
         exit(document.getElementById("exitButton"));
     </script>
 </body>
