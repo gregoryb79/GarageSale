@@ -12,9 +12,12 @@
 <body>
     <div class="main-container">
         <div class="sidebar">
-        <button id="exitButton">Exit</button>
-        <button onclick="location.href='../account/account.html'">My Account</button>
-    </div>
+            <button id="exitButton">Exit</button>
+            <button onclick="location.href='../home/home.html'">Home</button>
+            <button onclick="location.href='../account/account.html'">Wishlist</button>
+            <button onclick="location.href='../cart/cart.html'">Cart</button>        
+         </div>
+
     <div class="content">
         <div class="header">
             <h1>All Items</h1>
@@ -53,8 +56,11 @@
 
     <script type="module">
         import {index} from "./views.home.js";
+        import {exit} from "../utility.js";
 
-        index(document.getElementById("itemsList"),document.forms["searchForm"],document.getElementById("exitButton"));
+        index(document.getElementById("itemsList"),document.forms["searchForm"]);
+        exit(document.getElementById("exitButton"));
+        
     </script>
 </body>
 </html>

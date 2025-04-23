@@ -74,7 +74,7 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
 
 
     async function renderItems() {  
-         
+
         const token = localStorage.getItem('token');
         if (!token) {
             console.error("No token found in local storage. User is not logged in.");
@@ -84,12 +84,12 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
 
         try {
             const items = await getCart();
-            console.log(items);
+            console.log(items);            
 
-            const total = items.reduce((sum, item) => sum + item.quantity * item.itemPrice, 0);                        
-              totalPrice.textContent = `Total Price: $${total.toFixed(2)}`;
-
-            if(items.length > 0) {              
+            if(items.length > 0) {   
+                const total = items.reduce((sum, item) => sum + item.quantity * item.itemPrice, 0);                        
+                totalPrice.textContent = `Total Price: $${total.toFixed(2)}`;           
+                
                 cart.innerHTML = items
                     .map((item) => `                                
                                     <li class="cart-item" data-id="${item.itemId}">
