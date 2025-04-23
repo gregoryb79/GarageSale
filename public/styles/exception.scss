@@ -1,14 +1,131 @@
-@import 'utility.scss'; 
+@import 'utility.scss';
 
-.special-heading {
-  font-size: 2rem !important; // Override base heading size
-  color: $primary-color;      // Use primary color
-  margin-bottom: $large-spacing;
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.full-width-image {
-  width: 100% !important;
-  height: auto;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+@keyframes slideInFromLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    animation-name: fadeIn;
+  }
+
+  .container {
+    animation-name: fadeIn;
+  }
+
+  .content {
+    animation-name: fadeIn;
+  }
+
+  .sidebar {
+    animation-name: slideInFromLeft;
+  }
+
+  .header {
+    animation-name: fadeIn;
+  }
+
+  .site-footer {
+    animation-name: fadeIn;
+  }
+
+  form {
+    animation-name: fadeIn;
+  }
+
+  .button {
+    animation-name: fadeIn;
+  }
+
+  ul {
+    animation-name: fadeIn;
+  }
+
+  li {
+    animation-name: fadeIn;
+  }
+
+  .itemsList {
+    animation-name: fadeIn;
+  }
+
+  .itemsList .listing {
+    animation-name: fadeIn;
+  }
+
+  .wishlist-item {
+    animation-name: fadeIn;
+  }
+
+  .cart-item {
+    animation-name: fadeIn;
+  }
+
+  .total-price {
+    animation-name: fadeIn;
+  }
+
+  .payment-section {
+    animation-name: fadeIn;
+  }
+
+  .upload-form {
+    animation-name: fadeIn;
+  }
+
+  .search-container {
+    animation-name: fadeIn;
+  }
+
+  .register-link,
+  .back-link {
+    animation-name: fadeIn;
+  }
+}
+
+// Error Page Styling (404.html)
+.error-page > .main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  max-height: 90vh;
+}
+
+.error-page > .main-container p {
+  font-size: $font-size-large;
+  margin-bottom: $spacing-medium;
+  overflow: hidden; 
+  margin: 0;
+  height: 100%;
+}
+
+.error-page > .main-container a {
+  @extend .button;
+  background-color: $color-warning;
+  color: $color-text-primary;
+
+  .button:hover {
+    background-color: adjust-brightness($color-primary, -10%);
+   }
+
 }
