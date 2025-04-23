@@ -1,6 +1,3 @@
-// import {Item, Cart, Wishlist, ReturnWishlist} from "./model.js"
-import {items as tempItems, cart as tempCart, wishlist as tempWishlist} from "./devtemps.js"
-
 export type Item = {
     _id: string;
     name: string;

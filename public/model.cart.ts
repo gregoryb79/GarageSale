@@ -5,7 +5,6 @@ export type CartItem = {
     itemPrice: number; 
 }
 
-// export type ReturnCart =  {itemId : string, quantity: number, itemName: string, itemPrice: number}[];
 export async function getCart(): Promise<CartItem[]> {
     console.log("getCart starts"); 
     const token = localStorage.getItem('token');
