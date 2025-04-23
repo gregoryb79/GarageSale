@@ -1,4 +1,4 @@
-import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "../model.wishlist.js";
+import { deleteFromWishlist, getWishlist, addToWishList} from "../model.wishlist.js";
 import {addToCart} from "../model.cart.js";
 export async function index(wishlist: HTMLElement){
 
@@ -55,7 +55,7 @@ export async function index(wishlist: HTMLElement){
                 console.log(`Decreasing quantity of item ${itemId} in wishlist...`);
                 if (quantity > 1){
                     try {
-                        await updateQuantityInWishlist(itemId, quantity - 1);
+                        await addToWishList(itemId, (-1));
                         quantityElement.textContent = ` ${(quantity - 1).toFixed(0)} `;
                         console.log(`Quantity of item ${itemId} decreased successfully.`);                        
                     } catch (error) {
@@ -75,7 +75,7 @@ export async function index(wishlist: HTMLElement){
             } else if (button.textContent === "+") {
                 console.log(`Increasing quantity of item ${itemId} in wishlist...`);
                 try {
-                    await updateQuantityInWishlist(itemId, quantity + 1);
+                    await addToWishList(itemId,1);
                     quantityElement.textContent = ` ${(quantity + 1).toFixed(0)} `;
                     console.log(`Quantity of item ${itemId} increased successfully.`);                        
                 } catch (error) {

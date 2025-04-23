@@ -33,7 +33,7 @@ export async function doLogIn(email : string, password: string): Promise<void> {
         } else {
             console.error('No token received from the server');
             throw new Error('No token received from the server');
-        }
+        }        
         
     }catch(error){
         console.error(`Error logging in`, error);  

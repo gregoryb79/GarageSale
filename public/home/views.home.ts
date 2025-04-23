@@ -39,7 +39,7 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement)
                     alert("Item added to your wishlist.");
                 } catch (error) {
                     console.error(`Error adding item ${itemId} to cart:`, error);
-                    alert("Failed to add item to cart. Please try again.");
+                    alert("Failed to add item to wishlist. Please try again.");
                 }
             }
         }

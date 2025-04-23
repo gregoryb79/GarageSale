@@ -1,18 +1,12 @@
-import {items as tempItems, cart as tempCart, wishlist as tempUserWishlist} from "./devtemps.js"
-import {getItem} from "./model.items.js"
-// import {Item, Cart, Wishlist, ReturnCart} from "./model.js"
-
-export type Cart = {
-    _id: string;
-    userId: string; 
-    items: {itemId : string,
-        quantity: number}[];
-    createdAt?: string; 
-    updatedAt?: string; 
+export type CartItem = {
+    itemId: string;
+    quantity: number; 
+    itemName: string;
+    itemPrice: number; 
 }
 
-export type ReturnCart =  {itemId : string, quantity: number, itemName: string, itemPrice: number}[];
-export async function getCart(): Promise<ReturnCart|[]> {
+// export type ReturnCart =  {itemId : string, quantity: number, itemName: string, itemPrice: number}[];
+export async function getCart(): Promise<CartItem[]> {
     console.log("getCart starts"); 
     const token = localStorage.getItem('token');
     try {
@@ -26,28 +20,10 @@ export async function getCart(): Promise<ReturnCart|[]> {
             const message = await res.text();             
             throw new Error(`Failed to get cart. Status: ${res.status}. Message: ${message}`);
         }        
-        const cart = await res.json() as Cart;         
-        const items = cart.items; 
-        const userCart : ReturnCart = [];
-        for (const item of items) {
-            try {
-                const itemDetails = await getItem(item.itemId);
-                if (!itemDetails) {
-                    console.error(`Item with ID ${item.itemId} not found.`);
-                    continue;
-                }
-                const itemId = item.itemId;
-                const quantity = item.quantity;
-                const itemName = itemDetails.name;
-                const itemPrice = itemDetails.price;
-                userCart.push({itemId, quantity, itemName, itemPrice});
-            }catch (error) {
-                console.error(`Error fetching item details for ID ${item.itemId}:`, error);
-                continue;
-            } 
-            
-        }
-        return userCart;
+        const cart = await res.json() as CartItem[];
+        console.log("Cart found:", cart);         
+        
+        return cart;
 
     }catch (error) {
         console.error("Error getting wishlist:", error);
@@ -80,31 +56,6 @@ export async function addToCart(itemId: string,quantity : number): Promise<void>
     } 
 }
 
-export async function updateQuantityInCart(itemId: string, quantity: number): Promise<void> {
-    console.log(`updateQuantityInCart with itemId = "${itemId}" and quantity = "${quantity}" starts`);
-    const body = JSON.stringify({itemId: itemId, quantity: quantity});
-    console.log(`body: ${body}`);
-    const token = localStorage.getItem('token');
-
-    try {
-        const res = await fetch(`/cart`, {
-            method: "post",
-            body: body,
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "content-type": "application/json"
-            }
-        });
-        if (!res.ok) {
-            const message = await res.text();             
-            throw new Error(`Failed to update quantity in cart. Status: ${res.status}. Message: ${message}`);
-        }        
-    }catch (error) {
-        console.error("Error updating quantity in cart:", error);        
-        throw error;        
-    } 
-}
-
 export async function deleteFromCart(itemId: string): Promise<void> {
     console.log(`deleteFromCart with itemId = "${itemId}" starts`);
     const token = localStorage.getItem('token');
@@ -119,10 +70,10 @@ export async function deleteFromCart(itemId: string): Promise<void> {
         });
         if (!res.ok) {
             const message = await res.text();             
-            throw new Error(`Failed to delete item from wishlist. Status: ${res.status}. Message: ${message}`);
+            throw new Error(`Failed to delete item from cart. Status: ${res.status}. Message: ${message}`);
         }        
     }catch (error) {
-        console.error("Error deleting item from wishlist:", error);        
+        console.error("Error deleting item from cart:", error);        
         throw error;        
     } 
 }
