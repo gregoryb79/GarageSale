@@ -1,8 +1,8 @@
 ## Module 3 Personal Final Project
 
 GarageSale is a full-stack web store application built with Node.js, MongoDB, and CUBE/MVC. 
-It allows users to browse a catalog of items, add products to their shopping cart or wishlist, and manage their accounts with ease.  
-GarageSale offers a clean, responsive interface for listing, discovering, and purchasing items.
+It allows users to browse a catalog of items, add products to their shopping cart or wishlist, and moving items from wishlist to cart.  
+GarageSale offers a clean, responsive interface for discovering, and purchasing items.
 
 # MVP Features
 
@@ -22,6 +22,7 @@ GarageSale offers a clean, responsive interface for listing, discovering, and pu
 
 - **Wishlist**
   - Users can save items they like to a personal wishlist.
+  - Users can view, update quantities, or remove items from their wishlist.
   - Wishlist items can be moved to the cart or removed.
 
 - **Admin Features** *(optional not in MVP)*

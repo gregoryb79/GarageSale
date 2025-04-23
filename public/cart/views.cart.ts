@@ -1,4 +1,3 @@
-// import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "./model.account.js";
 import {getCart, deleteFromCart, addToCart} from "../model.cart.js";
 
 export async function index(cart: HTMLElement, totalPrice: HTMLElement,loadingSpinner: HTMLElement) {
