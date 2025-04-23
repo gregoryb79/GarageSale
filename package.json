@@ -7,7 +7,7 @@
     "start": "tsx --no-check src/index.ts",
     "test": "jest",
     "dev": "npm-run-all -p dev:*",
-    "dev:server": "tsx --no-check --watch src/index.ts",
+    "dev:server": "tsx src/index.ts",
     "dev:client": "tsc --watch --project tsconfig.client.json --noCheck",
     "dev:sass": "sass --watch public",
     "build": "npm-run-all build:*",
@@ -18,9 +18,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.13.10",
     "jest": "^29.7.0",
@@ -31,10 +33,12 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
-    "mongoose": "^8.13.1"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2"
   }
 }
