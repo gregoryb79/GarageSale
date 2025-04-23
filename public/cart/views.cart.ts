@@ -1,11 +1,22 @@
 // import { deleteFromWishlist, getWishlist, updateQuantityInWishlist} from "./model.account.js";
-import {getCart, ReturnCart, deleteFromCart,updateQuantityInCart} from "../model.cart.js";
+import {getCart, deleteFromCart, addToCart} from "../model.cart.js";
 
-export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
+export async function index(cart: HTMLElement, totalPrice: HTMLElement,loadingSpinner: HTMLElement) {
 
     console.log("cart page");
 
-    await renderItems(); 
+    try{
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "block";
+        }
+        await renderItems();
+    } catch (error) {
+        console.error("Error rendering items:", error);
+    }finally {        
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "none";
+        }
+    } 
 
     cart.addEventListener("click", async (event) => {
         const target = event.target as HTMLElement;
@@ -29,59 +40,95 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
             if (button.textContent === "Remove") {                
                 console.log(`Deleting item ${itemId} from cart...`);
                 try {
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "block";
+                    }
                     await deleteFromCart(itemId);
-                    console.log(`Item ${itemId} deleted from cart successfully.`);                    
+                    console.log(`Item ${itemId} deleted from cart successfully.`);  
                     await renderItems();
                 } catch (error) {
                     console.error(`Error deleting item ${itemId} from cart:`, error);
                     alert("Failed to remove item. Please try again.");
+                }finally {        
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "none";
+                    }
                 }
             } else if (button.textContent === "-") {
                 console.log(`Decreasing quantity of item ${itemId} in cart...`);
                 if (quantity > 1){
                     try {
-                        await updateQuantityInCart(itemId, quantity - 1);                        
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "block";
+                        }
+                        await addToCart(itemId, (-1));                        
                         console.log(`Quantity of item ${itemId} decreased successfully.`); 
                         await renderItems();
                     } catch (error) {
                         console.error(`Error decreasing quantity of item ${itemId}:`, error);
                         alert("Failed to decrease quantity. Please try again.");
+                    }finally {        
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "none";
+                        }
                     }
                 }else{
                     try{
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "block";
+                        }
                         await deleteFromCart(itemId);
                         console.log(`Item ${itemId} deleted from cart successfully.`);
                         await renderItems();
                     }catch (error) {
                         console.error(`Error deleting item (q = 0) ${itemId} from cart:`, error);
                         alert("Failed to decrease quantity. Please try again.");
+                    }finally {        
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "none";
+                        }
                     }                    
                 }
             } else if (button.textContent === "+") {
-                console.log(`Increasing quantity of item ${itemId} in wishlist...`);
+                console.log(`Increasing quantity of item ${itemId} in cart...`);
                 try {
-                    await updateQuantityInCart(itemId, quantity + 1);                    
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "block";
+                    }
+                    await addToCart(itemId,1);                    
                     console.log(`Quantity of item ${itemId} increased successfully.`);                        
                     await renderItems();
                 } catch (error) {
                     console.error(`Error increasing quantity of item ${itemId}:`, error);
                     alert("Failed to increase quantity. Please try again.");
-                }                
+                }finally {        
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "none";
+                    }
+                }               
             }
         }
         
     });
 
 
-    async function renderItems() {               
+    async function renderItems() {  
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error("No token found in local storage. User is not logged in.");
+            cart.innerHTML = "<h3>Please log in to see your cart...</h3>";
+            return;
+        }
+
         try {
             const items = await getCart();
-            console.log(items);
+            console.log(items);            
 
-            const total = items.reduce((sum, item) => sum + item.quantity * item.itemPrice, 0);                        
-              totalPrice.textContent = `Total Price: $${total.toFixed(2)}`;
-
-            if(items.length > 0) {              
+            if(items.length > 0) {   
+                const total = items.reduce((sum, item) => sum + item.quantity * item.itemPrice, 0);                        
+                totalPrice.textContent = `Total Price: $${total.toFixed(2)}`;           
+                
                 cart.innerHTML = items
                     .map((item) => `                                
                                     <li class="cart-item" data-id="${item.itemId}">
@@ -97,6 +144,7 @@ export async function index(cart: HTMLElement, totalPrice: HTMLElement) {
                     .join("\n");
             }else{
                 cart.innerHTML = "<h3>Your cart is empty...</h3>";
+                totalPrice.textContent = `Total Price: $0.00`;
             } 
         }catch(error){
             console.error(error);

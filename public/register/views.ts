@@ -1,6 +1,6 @@
 import {onRegisterFormSubmit} from "./controller.js";
 
-export function register(registerForm : HTMLFormElement){
+export function register(registerForm : HTMLFormElement,loadingSpinner : HTMLElement){
 
     registerForm.addEventListener("submit", async function(e){
         e.preventDefault();         
@@ -12,6 +12,11 @@ export function register(registerForm : HTMLFormElement){
             .querySelectorAll("input, button")
             .forEach((element) => (element as HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement).disabled = true);
         try{
+
+            if (loadingSpinner) {
+                loadingSpinner.style.display = "block";
+            }
+
             const result = await onRegisterFormSubmit(formData);
                         
             if (result){
@@ -21,7 +26,11 @@ export function register(registerForm : HTMLFormElement){
         }catch(error){
             console.error(error);
             alert(error);
-        }     
+        }finally {        
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "none";
+        }
+    }     
         formElement
             .querySelectorAll("input, button")
             .forEach((element) => (element as HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement).disabled = false);

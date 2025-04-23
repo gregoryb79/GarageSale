@@ -12,9 +12,12 @@
 <body>
     <div class="main-container">
         <div class="sidebar">
-        <button onclick="location.href='../index.html'">Exit</button>
-        <button onclick="location.href='../account/account.html'">My Account</button>
-    </div>
+            <button id="exitButton">Exit</button>
+            <button onclick="location.href='../home/home.html'">Home</button>
+            <button onclick="location.href='../account/account.html'">Wishlist</button>
+            <button onclick="location.href='../cart/cart.html'">Cart</button>        
+         </div>
+
     <div class="content">
         <div class="header">
             <h1>All Items</h1>
@@ -25,6 +28,8 @@
                 <button type="submit" class="search-button">Search</button>
             </form>
         </div>
+
+        <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
         
         <ul class="itemsList" id="itemsList">
             <li class="listing">
@@ -44,14 +49,20 @@
                 <button>Add to Wishlist</button>
             </li>
         </ul>
+    </div>
+    </div>
+
      <footer class="site-footer">
             <p>&copy; 2025 Garage Sale. All rights reserved.</p>
         </footer>
-    </div>
+
     <script type="module">
         import {index} from "./views.home.js";
+        import {exit} from "../utility.js";
 
-        index(document.getElementById("itemsList"),document.forms["searchForm"]);
+        index(document.getElementById("itemsList"),document.forms["searchForm"],document.getElementById("loadingSpinner"));
+        exit(document.getElementById("exitButton"));
+        
     </script>
 </body>
 </html>

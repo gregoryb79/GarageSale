@@ -1,131 +1,115 @@
-@import 'utility.scss'; 
+@import 'utility.scss';
+@import 'block.scss';
+@import 'exception.scss';
 
-.page-header {
-  padding: $base-padding;
-  background-color: $background-color;
-  margin-bottom: $large-spacing;
-  border-bottom: 1px solid $border-color;
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  background-color: $color-background;
+  color: $color-text-primary;
+  display: flex;             
+  flex-direction: column;    
+  min-height: 100vh;        
+  overflow-x: hidden;
+}
 
-  h1 {
-    font-size: $large-font-size;
-    color: $text-color;
-    margin-bottom: $small-spacing;
+.main-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  @include respond-to(medium) {
+    flex-direction: row;
+  }
+  flex: 1; 
+}
+
+.container {
+  max-width: $container-width;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: $color-white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+  padding: $spacing-large;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: $color-grey-light;
+
+  @include respond-to(medium) {
+    width: 200px;
   }
 
-  nav {
-    ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-
-      li {
-        margin-right: $medium-spacing;
-
-        a {
-          color: $link-color;
-          text-decoration: none;
-
-          &:hover {
-            color: $link-hover-color;
-          }
-        }
-      }
-    }
+  button {
+     @extend .button !optional;
+     margin-bottom: 0.5rem;
+     display: block;
+     text-align: left;
+     padding: 0.75rem 1rem;
   }
 }
 
-.main-content {
-  padding: $base-padding;
-  margin-bottom: $large-spacing;
+.header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-  &__inner { 
-    max-width: 1200px;
-    margin: 0 auto;
+  h1 {
+    margin: 0;
+    color: $color-purple; 
   }
 
-  h2 {
-    font-size: $large-font-size;
-    color: $text-color;
-    margin-bottom: $medium-spacing;
-    text-align: center;
-  }
-
-  p {
-    font-size: $base-font-size;
-    color: $text-color;
-    line-height: 1.7;
-    margin-bottom: $small-spacing;
+  .header-title { 
+    font-size: $font-size-large;
+    margin-right: $spacing-medium;
   }
 }
 
 .site-footer {
-  background-color: #333; 
-  color: white;          
-  padding: 20px;
-  text-align: center;    
-  margin-top: 20px;
-  width: 100%;
-  margin-bottom:0%;
+  text-align: center;
+  padding: 1rem 0;
+  background-color: $color-grey-dark;
+  color: $color-white;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-medium;
 
-}
+  a {
+    color: $color-link;
+    text-decoration: none;
 
-.site-footer p {
-  font-size: 14px;      
-  margin: 0;            
-}
-
-
-.sidebar {
-  padding: $base-padding;
-  background-color: #e9ecef;
-  margin-bottom: $large-spacing;
-
-  h3 {
-    font-size: $medium-spacing;
-    color: $text-color;
-    margin-bottom: $medium-spacing;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      margin-bottom: $small-spacing;
-
-      a {
-        color: $link-color;
-        text-decoration: none;
-
-        &:hover {
-          color: $link-hover-color;
-        }
-      }
-    }
-  }
-}
-
-
-@include responsive(medium) {
-  .page-header {
-    nav {
-      ul {
-        flex-direction: column;
-        li {
-          margin-right: 0;
-          margin-bottom: $small-spacing;
-        }
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
-  .main-content {
-    padding: $base-padding / 2;
-  }
+}
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-large;
 
-  .sidebar {
-    padding: $base-padding / 2;
+  @include respond-to(small) {
+    grid-template-columns: 1fr; 
   }
+}
+
+
+.centered-content-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: $spacing-medium;
 }

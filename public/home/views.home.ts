@@ -2,11 +2,22 @@ import {addToCart} from "../model.cart.js";
 import {getItems} from "../model.items.js";
 import {addToWishList} from "../model.wishlist.js";
 
-export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement) {
+export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement,loadingSpinner: HTMLElement) {
 
     console.log("Welcome to GarageSale!");
 
-    await renderItems(""); 
+    try{
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "block";
+        }
+        await renderItems(``);
+    } catch (error) {
+        console.error("Error rendering items:", error);
+    }finally {        
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "none";
+        }
+    }
 
     itemsList.addEventListener("click", async (event) => {
         const target = event.target as HTMLElement;
@@ -39,7 +50,7 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement)
                     alert("Item added to your wishlist.");
                 } catch (error) {
                     console.error(`Error adding item ${itemId} to cart:`, error);
-                    alert("Failed to add item to cart. Please try again.");
+                    alert("Failed to add item to wishlist. Please try again.");
                 }
             }
         }
@@ -53,13 +64,19 @@ export async function index(itemsList: HTMLElement, searchForm: HTMLFormElement)
         console.log(`Searching for: ${query}`);
 
         try{
+            if (loadingSpinner) {
+                loadingSpinner.style.display = "block";
+            }
             await renderItems(`?search=${query}`);
         } catch (error) {
             console.error("Error rendering items:", error);
+        }finally {        
+            if (loadingSpinner) {
+                loadingSpinner.style.display = "none";
+            }
         }
                         
     });
-
 
     async function renderItems(query: string) {
         try{

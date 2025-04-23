@@ -12,14 +12,16 @@
 <body>
     <div class="main-container">
     <div class="sidebar">
+        <button id="exitButton">Exit</button>
+        <button onclick="location.href='../home/home.html'">Home</button>
         <button onclick="location.href='../account/account.html'">Wishlist</button>
-        <button onclick="location.href='./cart.html'">Cart</button>
-        <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
-        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button>
+        <button onclick="location.href='../cart/cart.html'">Cart</button> 
+        <!-- <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
+        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button> -->
     </div>
     <div class="content">
         <div class="header">
-            <button class="back-button" onclick="location.href='../account/account.html'">Back to Wishlist</button>
+            <!-- <button class="back-button" onclick="location.href='../account/account.html'">Back to Wishlist</button> -->
             <h1>My Cart</h1>
         </div>
         <ul class="cart" id="cart">
@@ -37,8 +39,10 @@
             </li>
         </ul>
 
+        <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
+
         <div class="total-price">
-            <p id="total-price">Total Price: $ZZ.ZZ</p>
+            <p id="total-price">Total Price: $0.00</p>
         </div>
 
         <div class="payment-section">
@@ -51,16 +55,19 @@
         </div>
     
     </div>
+</div>
 
     <footer class="site-footer">
         <p>&copy; 2025 Garage Sale. All rights reserved.</p>
     </footer>
-    </div>
+   
 
     <script type="module">
         import {index} from "./views.cart.js";
+        import {exit} from "../utility.js";
 
-        index(document.getElementById("cart"), document.getElementById("total-price")); 
+        index(document.getElementById("cart"), document.getElementById("total-price"),document.getElementById("loadingSpinner")); 
+        exit(document.getElementById("exitButton"));
     </script>
 </body>
 </html>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../styles/exception.css" />
 </head>
     <body>
-        <div class="main-container">
+
              <div class="container">
              <h1>Register</h1>
          <form id="registrationForm">
@@ -18,19 +18,18 @@
             <input name="password" type="password" placeholder="Password" required>
             <button type="submit">Register</button>
         </form>
+        <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
         <div class="back-link">
             <a href="../index.html">Back to Login</a>
         </div>
     </div>
+    
 
-        <footer class="site-footer">
-            <p>&copy; 2025 Garage Sale. All rights reserved.</p>
-        </footer>
-        </div>
+
     <script type="module">
         import { register } from "./views.js";
 
-        register(document.getElementById("registrationForm"));
+        register(document.getElementById("registrationForm"),document.getElementById("loadingSpinner"));
 
     </script>
 </body>

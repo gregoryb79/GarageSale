@@ -15,7 +15,7 @@
 <body>
         <div class="container">
             <h1>Garage Sale</h1>
-            <p>Welcome to Garage Sale, your online marketplace for buying and selling pre-owned items!</p>
+            <p>Welcome to Garage Sale, your online marketplace for buying pre-owned items!</p>
     
             <h2>Login</h2>
             <form id="loginForm">
@@ -23,15 +23,16 @@
                 <input name="password" type="password" placeholder="Password" required>
                 <button type="submit">Login</button>
             </form>
+            <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
             <div class="register-link">
                 <a href="./register/register.html">Register</a>
             </div>
         </div>
-
+    
     <script type="module">
         import { logIn } from "./views.js";
 
-        logIn(document.getElementById("loginForm"));
+        logIn(document.getElementById("loginForm"),document.getElementById("loadingSpinner"));
 
     </script>
 </body>

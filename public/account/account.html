@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account - Garage Sale</title>
+    <title>My Wishlist - Garage Sale</title>
     <link rel="stylesheet" href="../styles/composition.css" />
     <link rel="stylesheet" href="../styles/utility.css" />
     <link rel="stylesheet" href="../styles/block.css" />
@@ -12,14 +12,16 @@
 <body>
     <div class="main-container">
     <div class="sidebar">
-        <button onclick="location.href='./account.html'">Wishlist</button>
+        <button id="exitButton">Exit</button>
+        <button onclick="location.href='../home/home.html'">Home</button>
+        <button onclick="location.href='../account/account.html'">Wishlist</button>
         <button onclick="location.href='../cart/cart.html'">Cart</button>
-        <button onclick="location.href='../upload/upload.html'">Upload New Item</button>
-        <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button>
+        <!-- <button onclick="location.href='../upload/upload.html'">Upload New Item</button> -->
+        <!-- <button onclick="location.href='../my_listings/my_listings.html'">My Listings</button> -->
     </div>
     <div class="content">
         <div class="header">
-            <button class="back-button" onclick="location.href='../home/home.html'">Back to Home</button>
+            <!-- <button class="back-button" onclick="location.href='../home/home.html'">Back to Home</button> -->
             <h1>My Wishlist</h1>
         </div>
         <ul class="wishlist" id="wishlist"> 
@@ -44,16 +46,21 @@
                 <button>Delete</button>
             </li>
          </ul>
-
+         <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-busy="true" hidden></div>
+    </div>
+    </div>
          <footer class="site-footer">
             <p>&copy; 2025 Garage Sale. All rights reserved.</p>
         </footer>
-    </div>
+
+
 
         <script type="module">
             import {index} from "./views.account.js";
+            import {exit} from "../utility.js";
 
-            index(document.getElementById("wishlist"));
+            index(document.getElementById("wishlist"),document.getElementById("loadingSpinner"));
+            exit(document.getElementById("exitButton"));            
         </script>
 </body>
 </html>

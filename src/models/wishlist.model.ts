@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IWishlistItem {
   itemId: mongoose.Types.ObjectId;
+  quantity: number;
 }
 
 export interface IWishlist extends Document {
@@ -25,6 +26,11 @@ const wishlistSchema = new Schema<IWishlist>(
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Item',
           required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          min: 1,
         },
       },
     ],

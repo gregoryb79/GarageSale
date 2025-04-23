@@ -3,8 +3,19 @@ import Item from '../models/item.model';
 
 // קבלת כל הפריטים
 export const getItems = async (req: Request, res: Response, next: NextFunction) => {
+  const { search } = req.query;
+
   try {
-    const items = await Item.find();
+    // const items = await Item.find();
+    const items = await Item.find(
+      {
+          $or: [
+              { name: new RegExp(search?.toString() ?? "", "gi") },
+              { description: new RegExp(search?.toString() ?? "", "gi") },
+              { category: new RegExp(search?.toString() ?? "", "gi") },              
+          ],              
+      }
+  );   
     res.status(200).json(items);
   } catch (error) {
     next(error);
