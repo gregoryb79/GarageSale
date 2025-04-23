@@ -1,10 +1,21 @@
 import { deleteFromWishlist, getWishlist, addToWishList} from "../model.wishlist.js";
 import {addToCart} from "../model.cart.js";
-export async function index(wishlist: HTMLElement){
+export async function index(wishlist: HTMLElement,loadingSpinner: HTMLElement) {
 
     console.log("account page");
 
-    await renderItems(); 
+    try{
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "block";
+        }
+        await renderItems();
+    } catch (error) {
+        console.error("Error rendering items:", error);
+    }finally {        
+        if (loadingSpinner) {
+            loadingSpinner.style.display = "none";
+        }
+    }  
 
     wishlist.addEventListener("click", async (event) => {
         const target = event.target as HTMLElement;
@@ -27,6 +38,9 @@ export async function index(wishlist: HTMLElement){
             if (button.textContent === "Move to Cart") {                
                 console.log(`Adding item ${itemId} to cart...`);
                 try {
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "block";
+                    }
                     await addToCart(itemId,quantity);
                     console.log(`${quantity} of item ${itemId} added to cart successfully.`);
                     await deleteFromWishlist(itemId); 
@@ -40,48 +54,80 @@ export async function index(wishlist: HTMLElement){
                 } catch (error) {
                     console.error(`Error adding item ${itemId} to cart:`, error);
                     alert("Failed to mpoe to cart. Please try again.");
-                }
+                }finally {        
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "none";
+                    }
+                }  
             } else if (button.textContent === "Remove") {                
                 console.log(`Deleting item ${itemId} from wishlist...`);
                 try {
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "block";
+                    }
                     await deleteFromWishlist(itemId);
                     console.log(`Item ${itemId} deleted from wishlist successfully.`);
                     await renderItems();
                 } catch (error) {
                     console.error(`Error deleting item ${itemId} from wishlist:`, error);
                     alert("Failed to remove item. Please try again.");
-                }
+                }finally {        
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "none";
+                    }
+                }  
             } else if (button.textContent === "-") {
                 console.log(`Decreasing quantity of item ${itemId} in wishlist...`);
                 if (quantity > 1){
                     try {
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "block";
+                        }
                         await addToWishList(itemId, (-1));
                         quantityElement.textContent = ` ${(quantity - 1).toFixed(0)} `;
                         console.log(`Quantity of item ${itemId} decreased successfully.`);                        
                     } catch (error) {
                         console.error(`Error decreasing quantity of item ${itemId}:`, error);
                         alert("Failed to decrease quantity. Please try again.");
-                    }
+                    }finally {        
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "none";
+                        }
+                    }  
                 }else{
                     try{
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "block";
+                        }
                         await deleteFromWishlist(itemId);
                         console.log(`Item ${itemId} deleted from wishlist successfully.`);
                         await renderItems();
                     }catch (error) {
                         console.error(`Error deleting item (q = 0) ${itemId} from wishlist:`, error);
                         alert("Failed to decrease quantity. Please try again.");
-                    }                    
+                    }finally {        
+                        if (loadingSpinner) {
+                            loadingSpinner.style.display = "none";
+                        }
+                    }                      
                 }
             } else if (button.textContent === "+") {
                 console.log(`Increasing quantity of item ${itemId} in wishlist...`);
                 try {
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "block";
+                    }
                     await addToWishList(itemId,1);
                     quantityElement.textContent = ` ${(quantity + 1).toFixed(0)} `;
                     console.log(`Quantity of item ${itemId} increased successfully.`);                        
                 } catch (error) {
                     console.error(`Error increasing quantity of item ${itemId}:`, error);
                     alert("Failed to increase quantity. Please try again.");
-                }                
+                }finally {        
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = "none";
+                    }
+                }                  
             }
         }
         
